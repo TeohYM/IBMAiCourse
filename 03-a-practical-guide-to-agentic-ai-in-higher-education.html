@@ -5,439 +5,145 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>A practical guide to agentic AI in higher education — 學習筆記</title>
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  body {
-    font-family: -apple-system, "Segoe UI", system-ui, sans-serif;
-    font-size: 15px;
-    line-height: 1.7;
-    color: #1f2328;
-    background: #ffffff;
-    padding: 0 1rem 4rem;
-  }
-
-  /* ── Top nav ── */
-  .top-nav {
-    background: #ffffff;
-    border-bottom: 1px solid #e0e0e0;
-    height: 48px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 32px;
-    margin: 0 -1rem 2rem;
-  }
-  .top-nav .logo {
-    font-size: 18px;
-    font-weight: 600;
-    color: #161616;
-    text-decoration: none;
-  }
-  .top-nav .logo span { color: #0f62fe; }
-  .top-nav .back-link {
-    font-size: 14px;
-    color: #0f62fe;
-    text-decoration: none;
-  }
-  .top-nav .back-link:hover { text-decoration: underline; }
-
-  .container {
-    max-width: 800px;
-    margin: 0 auto;
-  }
-
-  /* ── Header ── */
-  .doc-header {
-    border-bottom: 2px solid #e5e7eb;
-    padding-bottom: 1.25rem;
-    margin-bottom: 2rem;
-  }
-  .doc-header h1 {
-    font-size: 1.45rem;
-    font-weight: 700;
-    color: #1f2328;
-    line-height: 1.35;
-    margin-bottom: 0.5rem;
-  }
-  .meta-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-top: 0.75rem;
-  }
-  .badge {
-    display: inline-block;
-    padding: 0.2rem 0.6rem;
-    border-radius: 4px;
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.02em;
-  }
-  .badge-cefr   { background: #dbeafe; color: #1d4ed8; }
-  .badge-lang   { background: #dcfce7; color: #15803d; }
-  .badge-source { background: #f3f4f6; color: #57606a; }
-
-  /* ── Section ── */
-  .section {
-    margin-bottom: 2.5rem;
-  }
-  .section-title {
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: #1f2328;
-    border-left: 4px solid #3b82d4;
-    padding-left: 0.7rem;
-    margin-bottom: 1.2rem;
-  }
-
-  /* ── Article text ── */
-  .article-body {
-    background: #f7f8fa;
-    border: 1px solid #e5e7eb;
-    border-radius: 6px;
-    padding: 1.25rem 1.5rem;
-    font-size: 14px;
-    line-height: 1.85;
-    color: #374151;
-  }
-  .article-body p { margin-bottom: 0.9rem; }
-  .article-body p:last-child { margin-bottom: 0; }
-  .article-body strong { color: #1f2328; }
-  .article-body em { font-style: italic; color: #4b5563; }
-
-  /* ── Discourse Summary ── */
-  .summary-box {
-    background: #f7f8fa;
-    border: 1px solid #e5e7eb;
-    border-radius: 6px;
-    padding: 1rem 1.25rem;
-  }
-  .summary-box dl { display: grid; grid-template-columns: 7rem 1fr; gap: 0.4rem 0.75rem; }
-  .summary-box dt { font-weight: 600; color: #57606a; font-size: 13px; padding-top: 0.1rem; }
-  .summary-box dd { color: #1f2328; font-size: 14px; }
-
-  /* ── Vocab Cards ── */
-  .vocab-card {
-    border: 1px solid #e5e7eb;
-    border-radius: 8px;
-    margin-bottom: 1.25rem;
-    overflow: hidden;
-  }
-  .vocab-card-header {
-    background: #3b82d4;
-    color: #ffffff;
-    padding: 0.65rem 1rem;
-    display: flex;
-    align-items: baseline;
-    gap: 0.75rem;
-    flex-wrap: wrap;
-  }
-  .vocab-word {
-    font-size: 1.05rem;
-    font-weight: 700;
-  }
-  .vocab-ipa {
-    font-size: 13px;
-    opacity: 0.85;
-    font-family: serif;
-  }
-  .vocab-cefr-badge {
-    margin-left: auto;
-    background: rgba(255,255,255,0.22);
-    color: #fff;
-    padding: 0.15rem 0.5rem;
-    border-radius: 4px;
-    font-size: 11px;
-    font-weight: 700;
-  }
-  .vocab-card-body {
-    padding: 0.9rem 1rem 1rem;
-  }
-  .vocab-row {
-    display: grid;
-    grid-template-columns: 8rem 1fr;
-    gap: 0.3rem 0.75rem;
-    margin-bottom: 0.7rem;
-    font-size: 14px;
-  }
-  .vocab-label {
-    font-weight: 600;
-    color: #57606a;
-    font-size: 13px;
-    padding-top: 0.1rem;
-  }
-  .vocab-value { color: #1f2328; }
-  .vocab-value em { font-style: normal; color: #57606a; font-size: 13px; }
-  .example-block {
-    background: #f0f6ff;
-    border-left: 3px solid #3b82d4;
-    border-radius: 0 4px 4px 0;
-    padding: 0.5rem 0.75rem;
-    margin: 0.2rem 0 0.5rem;
-    font-size: 14px;
-  }
-  .example-block .orig { color: #1f2328; font-style: italic; margin-bottom: 0.2rem; }
-  .example-block .trans { color: #57606a; font-size: 13px; }
-  .colloc-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  .colloc-list li {
-    font-size: 14px;
-    padding: 0.15rem 0;
-  }
-  .colloc-list li::before {
-    content: "• ";
-    color: #3b82d4;
-  }
-  .colloc-term { font-weight: 600; color: #1f2328; }
-  .confuse-box {
-    background: #fff7ed;
-    border: 1px solid #fed7aa;
-    border-radius: 4px;
-    padding: 0.45rem 0.75rem;
-    font-size: 13px;
-    color: #92400e;
-    margin-top: 0.3rem;
-  }
-
-  /* ── Grammar Cards ── */
-  .grammar-card {
-    border: 1px solid #e5e7eb;
-    border-radius: 8px;
-    margin-bottom: 1.25rem;
-    overflow: hidden;
-  }
-  .grammar-card-header {
-    background: #7c5cd8;
-    color: #fff;
-    padding: 0.65rem 1rem;
-    font-size: 0.9rem;
-    font-weight: 700;
-  }
-  .grammar-card-body {
-    padding: 0.9rem 1rem 1rem;
-    font-size: 14px;
-  }
-  .grammar-quote {
-    background: #faf5ff;
-    border-left: 3px solid #7c5cd8;
-    border-radius: 0 4px 4px 0;
-    padding: 0.55rem 0.8rem;
-    font-style: italic;
-    color: #1f2328;
-    margin-bottom: 0.75rem;
-  }
-  .grammar-section-label {
-    font-weight: 700;
-    color: #57606a;
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    margin: 0.7rem 0 0.3rem;
-  }
-  .grammar-rule {
-    background: #f7f8fa;
-    border: 1px solid #e5e7eb;
-    border-radius: 4px;
-    padding: 0.5rem 0.75rem;
-    font-size: 14px;
-    margin-bottom: 0.6rem;
-  }
-  .analogy-block {
-    background: #f0fdf4;
-    border-left: 3px solid #16a34a;
-    border-radius: 0 4px 4px 0;
-    padding: 0.5rem 0.75rem;
-    font-size: 14px;
-    margin-bottom: 0.4rem;
-  }
-  .analogy-block .orig { font-style: italic; color: #1f2328; margin-bottom: 0.2rem; }
-  .analogy-block .trans { color: #57606a; font-size: 13px; }
-  .register-note {
-    background: #fefce8;
-    border: 1px solid #fde68a;
-    border-radius: 4px;
-    padding: 0.4rem 0.7rem;
-    font-size: 13px;
-    color: #713f12;
-  }
-
-  /* ── Structure tag pills ── */
-  .struct-list {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem;
-    margin: 0.3rem 0 0.6rem;
-  }
-  .struct-list li {
-    background: #f3f0ff;
-    border: 1px solid #c4b5fd;
-    border-radius: 12px;
-    padding: 0.15rem 0.6rem;
-    font-size: 12px;
-    color: #5b21b6;
-  }
-
-  /* ── Cultural Context ── */
-  .culture-item {
-    border: 1px solid #e5e7eb;
-    border-radius: 6px;
-    padding: 0.8rem 1rem;
-    margin-bottom: 0.75rem;
-    font-size: 14px;
-  }
-  .culture-item-title {
-    font-weight: 700;
-    color: #1f2328;
-    margin-bottom: 0.35rem;
-    font-size: 13px;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    color: #3b82d4;
-  }
-
-  /* ── Flashcard Table ── */
-  .fc-section-title {
-    font-weight: 700;
-    color: #57606a;
-    font-size: 13px;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin: 1rem 0 0.5rem;
-  }
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 14px;
-    margin-bottom: 1.25rem;
-  }
-  th {
-    background: #f7f8fa;
-    border: 1px solid #e5e7eb;
-    padding: 0.5rem 0.75rem;
-    text-align: left;
-    font-weight: 600;
-    color: #57606a;
-    font-size: 13px;
-  }
-  td {
-    border: 1px solid #e5e7eb;
-    padding: 0.5rem 0.75rem;
-    vertical-align: top;
-  }
-  tr:nth-child(even) td { background: #f7f8fa; }
-  .fc-word { font-weight: 600; color: #1d4ed8; }
-  .fc-ipa { font-size: 12px; color: #57606a; font-family: serif; }
-
-  /* ── Review tip ── */
-  .review-tip {
-    background: #f0fdf4;
-    border: 1px solid #bbf7d0;
-    border-radius: 6px;
-    padding: 0.65rem 1rem;
-    font-size: 13px;
-    color: #15803d;
-    margin-bottom: 1rem;
-  }
-
-  /* ── TOC ── */
-  .toc {
-    background: #f7f8fa;
-    border: 1px solid #e5e7eb;
-    border-radius: 8px;
-    padding: 1rem 1.25rem;
-    margin-bottom: 2rem;
-  }
-  .toc-title {
-    font-size: 12px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: #57606a;
-    margin-bottom: 0.6rem;
-  }
-  .toc ol {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    counter-reset: toc-counter;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem 0.75rem;
-  }
-  .toc ol li {
-    counter-increment: toc-counter;
-  }
-  .toc ol li a {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
-    padding: 0.25rem 0.65rem;
-    background: #ffffff;
-    border: 1px solid #e5e7eb;
-    border-radius: 20px;
-    font-size: 13px;
-    color: #3b82d4;
-    text-decoration: none;
-    white-space: nowrap;
-    transition: background 0.15s, border-color 0.15s;
-  }
-  .toc ol li a:hover {
-    background: #eff6ff;
-    border-color: #3b82d4;
-    color: #1d4ed8;
-  }
-  .toc ol li a .toc-num {
-    font-size: 11px;
-    font-weight: 700;
-    color: #57606a;
-    background: #e5e7eb;
-    border-radius: 10px;
-    padding: 0 0.4rem;
-    line-height: 1.6;
-  }
-
-  /* ── Back to top ── */
-  .back-to-top {
-    display: inline-block;
-    font-size: 12px;
-    color: #57606a;
-    text-decoration: none;
-    border: 1px solid #e5e7eb;
-    border-radius: 4px;
-    padding: 0.15rem 0.5rem;
-    float: right;
-    margin-top: -0.15rem;
-  }
-  .back-to-top:hover { color: #3b82d4; border-color: #3b82d4; }
-
-  /* ── Footer ── */
-  footer {
-    border-top: 1px solid #e5e7eb;
-    margin-top: 3rem;
-    padding-top: 1rem;
-    text-align: center;
-    font-size: 12px;
-    color: #57606a;
-  }
-
-  @media (max-width: 600px) {
-    .vocab-row, .summary-box dl { grid-template-columns: 1fr; }
-    .vocab-label, .summary-box dt { font-weight: 700; color: #1f2328; }
-    .vocab-cefr-badge { margin-left: 0; }
-    .toc ol { flex-direction: column; gap: 0.3rem; }
-  }
+:root{--bg:#f6f7f9;--surface:#fff;--ink:#101828;--muted:#566074;--line:#dce1e9;--blue:#0f62fe;--blue-deep:#0043ce;--blue-tint:#e8f0ff;--violet:#6929c4;--violet-tint:#f1ebff;--green:#198038;--green-tint:#e6f5ea;--amber:#8a5a00;--amber-tint:#fff4d6;--code-bg:#101828;--code-ink:#e6ebf5;--ask:#0f62fe;--plan:#8a3ffc;--agent:#198038;
+--serif:'Noto Serif TC','Songti TC','PMingLiU',serif;--sans:'IBM Plex Sans','Noto Sans TC','PingFang TC','Microsoft JhengHei','Helvetica Neue',Arial,sans-serif;--mono:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace}
+@media(prefers-color-scheme:dark){:root{--bg:#0d121b;--surface:#151c28;--ink:#eef1f7;--muted:#9aa5b8;--line:#263042;--blue:#78a9ff;--blue-deep:#a6c8ff;--blue-tint:#172848;--violet:#be95ff;--violet-tint:#241a3d;--green:#42be65;--green-tint:#12301d;--amber:#f1c21b;--amber-tint:#33290b;--code-bg:#090d14;--ask:#78a9ff;--plan:#be95ff;--agent:#42be65}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{font-family:var(--sans);font-size:16px;line-height:1.75;color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased}
+a{color:var(--blue-deep)}:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+strong{font-weight:600}em{font-style:normal;color:var(--muted)}
+.utility-bar{display:none}
+.top-nav{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;height:56px;padding:0 clamp(16px,4vw,40px);background:color-mix(in srgb,var(--surface) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.logo{font-weight:600;font-size:18px;text-decoration:none;color:var(--ink)}.logo span{color:var(--blue)}
+.back-link{font-size:14px;text-decoration:none;color:var(--muted);padding:6px 14px;border-radius:999px;transition:background .2s,color .2s}
+.back-link:hover{background:var(--blue-tint);color:var(--blue-deep)}
+.page-content,.container,.page{max-width:920px;margin:0 auto;padding:0 clamp(16px,4vw,40px) 72px}
+/* hero */
+.hero,.doc-header,.header{padding:clamp(40px,7vw,72px) 0 36px;margin-bottom:12px;border-bottom:1px solid var(--line)}
+.header-top{display:flex}
+.hero-eyebrow{font-size:14px;color:var(--muted);margin-bottom:14px}
+h1{font-family:var(--serif);font-weight:900;font-size:clamp(30px,5.5vw,48px);line-height:1.25;letter-spacing:-.01em}
+.hero>p:not(.hero-eyebrow),.meta{margin-top:20px;max-width:40em;font-size:17px;color:var(--muted)}
+.meta{font-size:14px;line-height:1.8}.meta a{word-break:break-all}
+.scenario-tag{display:inline-block;margin-bottom:14px;padding:3px 14px;border-radius:999px;font-size:13px;font-weight:600;background:var(--blue-tint);color:var(--blue-deep)}
+.meta-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+/* badges & tags */
+.badge,.tag,.pill,.lang-badge,.vocab-cefr-badge,.tip-badge,.mode-badge,.review-pill{display:inline-block;font-size:12.5px;font-weight:600;line-height:1.5;padding:2px 12px;border-radius:999px;background:var(--blue-tint);color:var(--blue-deep)}
+.badge-cefr,.vocab-cefr-badge,.tag-cefr-c1,.tag-cefr-b2{background:var(--amber-tint);color:var(--amber)}
+.badge-lang,.tag-pos,.pill-agent{background:var(--green-tint);color:var(--green)}
+.badge-source,.pill-plan{background:var(--violet-tint);color:var(--violet)}
+.header .badge:first-child{background:var(--blue-tint);color:var(--blue-deep)}
+/* headings */
+.section-title,.fc-section-title,.cultural-title,.grammar-title{font-family:var(--serif);font-weight:700;line-height:1.35}
+.section-title{display:flex;align-items:baseline;justify-content:space-between;gap:16px;font-size:clamp(22px,3.5vw,28px);margin:56px 0 14px;padding-bottom:12px;border-bottom:2px solid var(--ink)}
+.section{margin-top:8px}.section>.section-title:first-child{margin-top:48px}
+.fc-section-title{font-size:20px;margin:32px 0 12px}
+.back-to-top{font:400 13px var(--sans);color:var(--muted);text-decoration:none;white-space:nowrap}
+h3{font-family:var(--serif);font-size:19px;font-weight:700;line-height:1.4}
+.section-desc{max-width:42em;color:var(--muted);margin-bottom:20px}
+p+p{margin-top:12px}
+code{font-family:var(--mono);font-size:.85em;background:var(--blue-tint);color:var(--blue-deep);padding:2px 7px;border-radius:4px}
+pre{font-family:var(--mono);font-size:13px;line-height:1.8;white-space:pre-wrap;word-break:break-word;overflow-x:auto}
+/* TOC */
+.toc{margin:28px 0;padding:20px 24px;background:var(--surface);border:1px solid var(--line);border-radius:14px}
+.toc-title{font-weight:600;margin-bottom:10px}
+.toc ol{list-style:none;display:grid;gap:6px}
+.toc li{display:flex;align-items:baseline;gap:10px}.toc a{text-decoration:none;font-weight:500}.toc a:hover{text-decoration:underline}
+.toc-num{display:inline-grid;place-items:center;width:22px;height:22px;margin-right:8px;border-radius:50%;background:var(--ink);color:var(--bg);font-size:12px;font-weight:600}
+.toc-sub{font-size:14px;color:var(--muted)}
+/* generic cards */
+.article-panel,.vocab-card,.grammar-card,.cultural-card,.demo-section,.mode-card,.prompt-showcase{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.vocab-card,.grammar-card,.cultural-card,.mode-card{margin:20px 0}
+/* callouts */
+.callout,.callout-tip,.tip-box,.review-tip,.source-box,.register-note,.confuse-box,.grammar-note,.summary-box,.vocab-hook{margin:20px 0;padding:16px 22px;background:var(--blue-tint);border-left:4px solid var(--blue);border-radius:4px 12px 12px 4px;font-size:15px}
+.tip-box,.callout-tip{display:flex;gap:14px;background:var(--green-tint);border-color:var(--green)}
+.review-tip,.grammar-note,.confuse-box{background:var(--amber-tint);border-color:var(--amber)}
+.source-box{background:var(--surface);border-color:var(--line);color:var(--muted);font-size:14px}
+.vocab-hook{margin:12px 0 0;padding:8px 14px;font-size:14px}
+.register-note{background:var(--violet-tint);border-color:var(--violet)}
+.summary-box dl{display:grid;grid-template-columns:7em 1fr;gap:10px 16px}.summary-box dt{font-weight:600}
+/* 01 article */
+.article-panel-header{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;padding:14px 22px;background:var(--ink);color:var(--bg);font-size:14px}
+.article-meta{opacity:.75}.article-body{padding:8px 22px 22px}
+.article-row{display:grid;grid-template-columns:9em 1fr;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+.label,.vocab-label,.grammar-section-label,.abstract-label,.expected-label,.demo-label{font-size:13px;font-weight:600;color:var(--muted)}
+.article-excerpt{margin-top:18px;background:var(--bg);border-radius:10px;overflow:hidden}
+.excerpt-header{display:flex;justify-content:space-between;align-items:center;padding:10px 16px;font-size:13px;font-weight:600;border-bottom:1px solid var(--line)}
+.article-excerpt pre{padding:16px;font-family:var(--serif);font-size:15px}
+.mode-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px;margin:20px 0}
+.mode-card{margin:0;padding:22px;border-top:4px solid var(--accent,var(--blue))}
+.ask{--accent:var(--ask)}.plan{--accent:var(--plan)}.agent{--accent:var(--agent)}
+.mode-badge{background:var(--accent);color:var(--surface);margin-bottom:10px}
+.mode-card .desc{margin:8px 0 12px;font-size:15px;color:var(--muted)}
+.tag-row{display:flex;flex-wrap:wrap;gap:6px}.permission{margin-top:12px;font-size:13.5px;color:var(--muted)}
+.workflow-steps{display:flex;align-items:stretch;gap:10px;margin:28px 0;flex-wrap:wrap}
+.workflow-step{flex:1;min-width:150px;padding:16px;background:var(--surface);border:1px solid var(--line);border-bottom:4px solid var(--accent);border-radius:12px}
+.step-num{font-size:12.5px;color:var(--muted)}.step-mode{font-weight:700;color:var(--accent);margin:2px 0 6px}.step-desc{font-size:14px;color:var(--muted);line-height:1.6}
+.workflow-arrow{align-self:center;color:var(--muted);font-size:20px}
+.tip-badge{background:var(--green);color:var(--surface);align-self:flex-start;white-space:nowrap}
+/* prompts */
+.demo-section{margin:28px 0;padding:24px}.demo-label{margin-bottom:10px;color:var(--blue-deep)}
+.prompt-block,.prompt-showcase{border-radius:12px;overflow:hidden;background:var(--code-bg);color:var(--code-ink)}
+.prompt-showcase{margin:20px 0;border:0}
+.prompt-block-header,.prompt-header-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 16px 10px 20px;background:linear-gradient(90deg,#2a1a52,#1a1f3a);color:#e9defd;font-size:13.5px;font-weight:500}
+.prompt-block pre,.prompt-text,.prompt-block>div:not(.prompt-block-header){padding:18px 22px;font-family:var(--mono);font-size:13.5px;line-height:1.85;white-space:pre-wrap;display:block}
+.prompt-text{color:var(--code-ink)}
+.copy-btn{font:600 13px var(--sans);color:#fff;background:var(--violet);border:0;border-radius:999px;padding:6px 16px;cursor:pointer;transition:background .2s,transform .12s}
+.copy-btn:hover{background:#8a3ffc}.copy-btn:active{transform:scale(.96)}.copy-btn.copied{background:#198038}
+.response-header{padding:10px 20px;background:var(--surface);color:var(--muted);font-size:13px;font-weight:600;border-top:1px solid var(--line)}
+.response-content{padding:16px 22px;background:var(--surface);color:var(--ink);font-size:15px}
+.expected-label{margin:18px 0 8px}.expected{padding:16px 20px;background:var(--bg);border-radius:10px;font-size:15px}
+.output-block{margin-top:12px;padding:16px 20px;background:var(--bg);border-radius:10px;font-size:15px}
+.word{font-family:var(--serif);font-size:20px;font-weight:700}.ipa,.vocab-ipa,.fc-ipa,.flash-ipa{font-family:var(--mono);font-size:13px;color:var(--muted)}
+.meaning{margin:4px 0}.example{font-size:14px;color:var(--muted)}
+.path-badge{display:inline-flex;align-items:center;gap:10px;margin-bottom:16px;padding:6px 8px 6px 14px;background:var(--surface);border:1px solid var(--line);border-radius:999px;font-size:13px}
+.pb-label{color:var(--muted)}.pb-path{font-family:var(--mono);background:var(--code-bg);color:var(--code-ink);padding:2px 12px;border-radius:999px}
+/* tables */
+table{width:100%;border-collapse:collapse;margin:16px 0;background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:15px}
+.carbon-table,.flash-table{display:table}
+th{text-align:left;font-size:13px;font-weight:600;color:var(--muted);background:var(--bg);padding:12px 16px}
+td{padding:12px 16px;border-top:1px solid var(--line);vertical-align:top}
+.flash-word,.fc-word{font-family:var(--serif);font-weight:700;font-size:17px}.pos{font-size:12px;color:var(--green);font-weight:600;margin-left:6px}
+/* 03 vocab / grammar */
+.vocab-card-header,.grammar-card-header{display:flex;align-items:baseline;flex-wrap:wrap;gap:12px;padding:16px 22px;background:var(--bg);border-bottom:1px solid var(--line)}
+.grammar-card-header{font-family:var(--serif);font-weight:700;line-height:1.5}
+.vocab-word{font-family:var(--serif);font-size:22px;font-weight:700}
+.vocab-card-body,.grammar-card-body{padding:18px 22px}
+.vocab-row{display:grid;grid-template-columns:5.5em 1fr;gap:12px;padding:8px 0}
+.example-block,.vocab-example{margin:12px 0;padding:12px 16px;border-left:3px solid var(--line);background:var(--bg);border-radius:0 8px 8px 0;font-size:15px}
+.orig{font-weight:500}.trans{color:var(--muted);font-size:14px;margin-top:4px}.orig strong,.vocab-example em,.highlight{background:var(--amber-tint);color:var(--ink);padding:0 4px;border-radius:3px}
+.colloc-list{list-style:none;display:grid;gap:4px;font-size:14.5px;margin:10px 0}.colloc-term,.col-item strong,.trap-key{font-weight:600;color:var(--blue-deep)}
+.grammar-quote,.grammar-sentence{margin:4px 0 16px;padding:14px 18px;font-family:var(--serif);font-size:17px;line-height:1.8;background:var(--blue-tint);border-radius:10px}
+.grammar-section-label{margin:16px 0 6px}.struct-list{margin-left:1.2em;font-size:15px}
+.grammar-rule,.analogy-block,.grammar-analogy{margin-top:12px;font-size:15px}.analogy-block,.grammar-analogy{padding:12px 16px;background:var(--bg);border-radius:10px;color:var(--muted)}
+.culture-item{margin:16px 0;padding:16px 20px;background:var(--surface);border:1px solid var(--line);border-radius:12px}.culture-item-title{font-weight:700;margin-bottom:6px}
+/* 04 */
+.abstract-box{padding:18px 22px;background:var(--surface);border:1px solid var(--line);border-radius:12px;font-family:var(--serif);font-size:16px;line-height:1.9}
+.abstract-box+.abstract-box,.abstract-label{margin-top:14px}.abstract-box.zh{font-family:var(--sans);font-size:14px;color:var(--muted)}
+.vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px;margin:20px 0}
+.vocab-grid .vocab-card{margin:0;padding:20px}.vocab-meta{display:flex;gap:6px;margin:8px 0}.vocab-zh{font-weight:600;margin-bottom:8px}.vocab-collocations{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:14px;margin-top:10px}
+.cultural-card{padding:20px 24px}.cultural-title{margin-bottom:10px;font-size:18px}.idiom-row{display:flex;flex-wrap:wrap;gap:6px 16px;padding:8px 0;border-top:1px solid var(--line)}.idiom-en{font-family:var(--serif);font-weight:700}.idiom-zh{color:var(--muted);font-size:15px}
+.trap-row{padding:10px 0;border-top:1px solid var(--line);font-size:15px}
+.review-schedule{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0}.review-pill{background:var(--surface);border:1px solid var(--line);color:var(--ink);font-weight:500;padding:6px 16px}
+.p04 .grammar-card{padding:20px 24px}.p04 .grammar-title{margin-bottom:12px;font-size:18px}.p04 .grammar-note{margin:12px 0 0}
+/* cta & footer */
+.cta-banner{margin-top:56px;padding:32px;text-align:center;background:var(--code-bg);color:var(--code-ink);border-radius:16px}
+.cta-link{display:inline-block;padding:10px 24px;border-radius:999px;background:var(--blue);color:#fff;text-decoration:none;font-weight:600}
+.cta-link:hover{background:var(--blue-deep)}
+.footer,footer{padding:36px 16px 48px;text-align:center;font-size:13px;color:var(--muted);border-top:1px solid var(--line)}
+@media(max-width:640px){.article-row,.vocab-row,.summary-box dl{grid-template-columns:1fr;gap:2px}.workflow-arrow{display:none}.section-title{flex-wrap:wrap}table{display:block;overflow-x:auto}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
 </style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;600&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@500;700;900&display=swap">
 </head>
-<body>
+<body class="p03">
 
   <nav class="top-nav">
     <a class="logo" href="index.html">IBM <span>Bob</span></a>
-    <a class="back-link" href="index.html">← 回索引</a>
+    <a class="back-link" href="index.html">← 回作品列表</a>
   </nav>
 <div class="container">
 
@@ -501,12 +207,12 @@
           <span class="vocab-label">中文釋義</span>
           <span class="vocab-value">自主性、自主運作能力</span>
         </div>
-        <div class="vocab-label" style="font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:#57606a;margin-bottom:0.3rem;">文章例句</div>
+        <div class="vocab-label">文章例句</div>
         <div class="example-block">
           <div class="orig">AI systems that can plan and complete multi-step tasks with a degree of <strong>autonomy</strong>.</div>
           <div class="trans">能以一定程度的自主性來規劃並完成多步驟任務的 AI 系統。</div>
         </div>
-        <div class="vocab-label" style="font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:#57606a;margin-bottom:0.3rem;">延伸造句 <em style="text-transform:none;letter-spacing:0;">(場景：職場)</em></div>
+        <div class="vocab-label">延伸造句 <em>(場景：職場)</em></div>
         <div class="example-block">
           <div class="orig">Remote employees often perform better when given greater <strong>autonomy</strong> over how they structure their workday.</div>
           <div class="trans">遠距工作者在獲得更大的工作時間自主安排空間時，往往有更好的表現。</div>
@@ -548,12 +254,12 @@
           <span class="vocab-label">中文釋義</span>
           <span class="vocab-value">治理、監管架構</span>
         </div>
-        <div class="vocab-label" style="font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:#57606a;margin-bottom:0.3rem;">文章例句</div>
+        <div class="vocab-label">文章例句</div>
         <div class="example-block">
           <div class="orig">As AI systems become capable of taking actions across university systems, <strong>governance</strong> becomes more important.</div>
           <div class="trans">隨著 AI 系統逐漸能夠在大學各系統中採取行動，治理架構的重要性也日益提升。</div>
         </div>
-        <div class="vocab-label" style="font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:#57606a;margin-bottom:0.3rem;">延伸造句 <em style="text-transform:none;letter-spacing:0;">(場景：職場)</em></div>
+        <div class="vocab-label">延伸造句 <em>(場景：職場)</em></div>
         <div class="example-block">
           <div class="orig">Effective data <strong>governance</strong> ensures that sensitive information is only accessed by authorised personnel.</div>
           <div class="trans">有效的資料治理確保敏感資訊只能由授權人員存取。</div>
@@ -581,7 +287,7 @@
 
     <!-- Card 3: interoperability -->
     <div class="vocab-card">
-      <div class="vocab-card-header" style="background:#1d4ed8;">
+      <div class="vocab-card-header">
         <span class="vocab-word">interoperability</span>
         <span class="vocab-ipa">/ˌɪntərˌɒp.ər.əˈbɪl.ɪ.ti/</span>
         <span class="vocab-cefr-badge">C2</span>
@@ -595,12 +301,12 @@
           <span class="vocab-label">中文釋義</span>
           <span class="vocab-value">系統互通性、相互操作能力</span>
         </div>
-        <div class="vocab-label" style="font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:#57606a;margin-bottom:0.3rem;">文章例句</div>
+        <div class="vocab-label">文章例句</div>
         <div class="example-block">
           <div class="orig">Identity management, permissions, data architecture, security and <strong>interoperability</strong> all become more important as agents begin working across university systems.</div>
           <div class="trans">當 AI 代理開始在大學各系統間運作，身分管理、權限、資料架構、安全性與系統互通性都變得更加重要。</div>
         </div>
-        <div class="vocab-label" style="font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:#57606a;margin-bottom:0.3rem;">延伸造句 <em style="text-transform:none;letter-spacing:0;">(場景：職場 IT)</em></div>
+        <div class="vocab-label">延伸造句 <em>(場景：職場 IT)</em></div>
         <div class="example-block">
           <div class="orig">The new hospital software was built with <strong>interoperability</strong> in mind, allowing it to exchange patient records with legacy systems seamlessly.</div>
           <div class="trans">這套新的醫院軟體在設計之初就考量到系統互通性，能與舊有系統無縫交換病患資料。</div>
@@ -628,7 +334,7 @@
 
     <!-- Card 4: pedagogy -->
     <div class="vocab-card">
-      <div class="vocab-card-header" style="background:#0f766e;">
+      <div class="vocab-card-header">
         <span class="vocab-word">pedagogy</span>
         <span class="vocab-ipa">/ˈped.ə.ɡɒdʒ.i/</span>
         <span class="vocab-cefr-badge">C1</span>
@@ -642,12 +348,12 @@
           <span class="vocab-label">中文釋義</span>
           <span class="vocab-value">教育學、教學法</span>
         </div>
-        <div class="vocab-label" style="font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:#57606a;margin-bottom:0.3rem;">文章例句</div>
+        <div class="vocab-label">文章例句</div>
         <div class="example-block">
           <div class="orig"><strong>Pedagogy</strong>, assessment and critical thinking therefore need to be considered as part of the design of an agent, rather than after it has been introduced.</div>
           <div class="trans">因此，教學法、評量方式與批判性思考，都應在設計 AI 代理時一併納入考量，而非在引入後才事後補救。</div>
         </div>
-        <div class="vocab-label" style="font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:#57606a;margin-bottom:0.3rem;">延伸造句 <em style="text-transform:none;letter-spacing:0;">(場景：學術)</em></div>
+        <div class="vocab-label">延伸造句 <em>(場景：學術)</em></div>
         <div class="example-block">
           <div class="orig">The professor's innovative <strong>pedagogy</strong> combined project-based learning with real-world case studies.</div>
           <div class="trans">這位教授創新的教學法結合了專題導向學習與真實世界案例研究。</div>
@@ -675,7 +381,7 @@
 
     <!-- Card 5: scrutiny -->
     <div class="vocab-card">
-      <div class="vocab-card-header" style="background:#b45309;">
+      <div class="vocab-card-header">
         <span class="vocab-word">scrutiny</span>
         <span class="vocab-ipa">/ˈskruː.tɪ.ni/</span>
         <span class="vocab-cefr-badge">C1</span>
@@ -689,12 +395,12 @@
           <span class="vocab-label">中文釋義</span>
           <span class="vocab-value">詳細審查、嚴密審視</span>
         </div>
-        <div class="vocab-label" style="font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:#57606a;margin-bottom:0.3rem;">文章例句</div>
+        <div class="vocab-label">文章例句</div>
         <div class="example-block">
           <div class="orig">Processes involving admissions, assessment, academic progression or other high-impact decisions require considerably more <strong>scrutiny</strong> than routine administrative work.</div>
           <div class="trans">涉及入學申請、成績評核、學業進度或其他高影響力決策的流程，需要比例行行政工作多得多的嚴密審查。</div>
         </div>
-        <div class="vocab-label" style="font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:#57606a;margin-bottom:0.3rem;">延伸造句 <em style="text-transform:none;letter-spacing:0;">(場景：職場)</em></div>
+        <div class="vocab-label">延伸造句 <em>(場景：職場)</em></div>
         <div class="example-block">
           <div class="orig">The company's financial reports were placed under intense <strong>scrutiny</strong> following the audit findings.</div>
           <div class="trans">在審計結果出爐後，該公司的財務報告受到嚴密審查。</div>
