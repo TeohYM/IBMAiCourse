@@ -1,143 +1,146 @@
-
 <html lang="zh-TW">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Academic English Cheatsheet — ML &amp; Geotechnical Engineering</title>
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: -apple-system, "Segoe UI", system-ui, sans-serif;
-    font-size: 14px;
-    line-height: 1.6;
-    background: #ffffff;
-    color: #1f2328;
-    max-width: 760px;
-    margin: 0 auto;
-    padding: 32px 24px 48px;
-  }
-
-  /* Header */
-  .header { border-bottom: 2px solid #e5e7eb; padding-bottom: 20px; margin-bottom: 28px; }
-  .header-top { display: flex; align-items: flex-start; gap: 16px; flex-wrap: wrap; }
-  .badge { background: #3b82d4; color: #fff; font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 4px; white-space: nowrap; }
-  .badge-cefr { background: #7c5cd8; }
-  .badge-lang { background: #16a34a; }
-  h1 { font-size: 20px; font-weight: 700; color: #1f2328; line-height: 1.35; margin-bottom: 8px; }
-  .meta { font-size: 12px; color: #57606a; margin-top: 8px; }
-  .meta a { color: #3b82d4; text-decoration: none; }
-  .meta a:hover { text-decoration: underline; }
-
-  /* Section titles */
-  .section { margin-bottom: 32px; }
-  .section-title {
-    font-size: 13px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: #57606a;
-    border-bottom: 1px solid #e5e7eb;
-    padding-bottom: 6px;
-    margin-bottom: 16px;
-  }
-
-  /* Abstract */
-  .abstract-box {
-    background: #f7f8fa;
-    border-left: 3px solid #3b82d4;
-    padding: 14px 16px;
-    border-radius: 0 6px 6px 0;
-    font-size: 13px;
-    margin-bottom: 12px;
-  }
-  .abstract-box.zh { border-left-color: #e5e7eb; }
-  .abstract-label { font-size: 11px; font-weight: 600; color: #57606a; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.05em; }
-
-  /* Vocab cards */
-  .vocab-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-  @media (max-width: 560px) { .vocab-grid { grid-template-columns: 1fr; } }
-  .vocab-card {
-    background: #f7f8fa;
-    border: 1px solid #e5e7eb;
-    border-radius: 8px;
-    padding: 14px 16px;
-  }
-  .vocab-word { font-size: 16px; font-weight: 700; color: #1f2328; }
-  .vocab-ipa { font-size: 12px; color: #57606a; font-style: italic; margin-left: 4px; }
-  .vocab-meta { display: flex; gap: 6px; margin: 6px 0 8px; flex-wrap: wrap; }
-  .tag { font-size: 11px; padding: 2px 7px; border-radius: 10px; font-weight: 600; }
-  .tag-pos { background: #e0e7ff; color: #3730a3; }
-  .tag-cefr-b2 { background: #fef3c7; color: #92400e; }
-  .tag-cefr-c1 { background: #fee2e2; color: #991b1b; }
-  .vocab-zh { font-size: 13px; color: #1f2328; margin-bottom: 8px; font-weight: 500; }
-  .vocab-example { font-size: 12px; color: #57606a; font-style: italic; border-left: 2px solid #e5e7eb; padding-left: 8px; margin-bottom: 8px; }
-  .vocab-example .en { color: #1f2328; }
-  .vocab-collocations { font-size: 12px; }
-  .vocab-collocations .col-item { color: #57606a; }
-  .vocab-collocations .col-item strong { color: #3b82d4; font-style: italic; }
-  .vocab-hook { font-size: 12px; color: #57606a; background: #fffbeb; border: 1px solid #fde68a; border-radius: 4px; padding: 4px 8px; margin-top: 6px; }
-
-  /* Grammar */
-  .grammar-card {
-    background: #f7f8fa;
-    border: 1px solid #e5e7eb;
-    border-radius: 8px;
-    padding: 16px;
-    margin-bottom: 14px;
-  }
-  .grammar-title { font-size: 13px; font-weight: 700; color: #3b82d4; margin-bottom: 10px; }
-  .grammar-sentence {
-    background: #fff;
-    border: 1px solid #e5e7eb;
-    border-radius: 6px;
-    padding: 10px 12px;
-    font-size: 13px;
-    font-style: italic;
-    margin-bottom: 10px;
-    color: #1f2328;
-  }
-  .grammar-sentence .highlight { background: #fef9c3; padding: 1px 2px; border-radius: 2px; font-style: normal; font-weight: 600; }
-  .grammar-rule { font-size: 12px; color: #57606a; margin-bottom: 8px; }
-  .grammar-analogy { font-size: 12px; background: #f0fdf4; border-left: 3px solid #16a34a; padding: 8px 10px; border-radius: 0 4px 4px 0; }
-  .grammar-note { font-size: 11px; color: #7c5cd8; margin-top: 6px; font-style: italic; }
-
-  /* Cultural */
-  .cultural-card {
-    background: #f7f8fa;
-    border: 1px solid #e5e7eb;
-    border-radius: 8px;
-    padding: 14px 16px;
-    margin-bottom: 10px;
-  }
-  .cultural-title { font-size: 12px; font-weight: 700; color: #57606a; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; }
-  .idiom-row { display: flex; gap: 10px; margin-bottom: 6px; flex-wrap: wrap; }
-  .idiom-en { font-style: italic; font-weight: 600; color: #3b82d4; min-width: 140px; }
-  .idiom-zh { color: #1f2328; font-size: 13px; }
-  .trap-row { font-size: 12px; margin-bottom: 5px; }
-  .trap-row .trap-key { font-weight: 700; color: #991b1b; }
-
-  /* Flashcards */
-  .flash-table { width: 100%; border-collapse: collapse; font-size: 13px; }
-  .flash-table th { background: #f7f8fa; color: #57606a; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; padding: 8px 12px; border: 1px solid #e5e7eb; }
-  .flash-table td { padding: 9px 12px; border: 1px solid #e5e7eb; vertical-align: top; }
-  .flash-table tr:nth-child(even) td { background: #fafbfc; }
-  .flash-word { font-weight: 700; color: #1f2328; }
-  .flash-ipa { font-style: italic; color: #57606a; font-size: 11px; }
-  .flash-def { color: #1f2328; }
-  .flash-def .pos { color: #7c5cd8; font-size: 11px; font-weight: 600; }
-  .review-schedule { display: flex; gap: 10px; margin-bottom: 14px; flex-wrap: wrap; }
-  .review-pill { font-size: 11px; background: #f7f8fa; border: 1px solid #e5e7eb; border-radius: 20px; padding: 4px 12px; color: #57606a; }
-  .review-pill span { font-weight: 700; color: #1f2328; }
-
-  /* Source box */
-  .source-box { background: #f7f8fa; border: 1px solid #e5e7eb; border-radius: 6px; padding: 12px 16px; font-size: 12px; color: #57606a; }
-  .source-box strong { color: #1f2328; }
-
-  /* Footer */
-  .footer { text-align: center; font-size: 12px; color: #57606a; border-top: 1px solid #e5e7eb; padding-top: 16px; margin-top: 40px; }
+:root{--bg:#f6f7f9;--surface:#fff;--ink:#101828;--muted:#566074;--line:#dce1e9;--blue:#0f62fe;--blue-deep:#0043ce;--blue-tint:#e8f0ff;--violet:#6929c4;--violet-tint:#f1ebff;--green:#198038;--green-tint:#e6f5ea;--amber:#8a5a00;--amber-tint:#fff4d6;--code-bg:#101828;--code-ink:#e6ebf5;--ask:#0f62fe;--plan:#8a3ffc;--agent:#198038;
+--serif:'Noto Serif TC','Songti TC','PMingLiU',serif;--sans:'IBM Plex Sans','Noto Sans TC','PingFang TC','Microsoft JhengHei','Helvetica Neue',Arial,sans-serif;--mono:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace}
+@media(prefers-color-scheme:dark){:root{--bg:#0d121b;--surface:#151c28;--ink:#eef1f7;--muted:#9aa5b8;--line:#263042;--blue:#78a9ff;--blue-deep:#a6c8ff;--blue-tint:#172848;--violet:#be95ff;--violet-tint:#241a3d;--green:#42be65;--green-tint:#12301d;--amber:#f1c21b;--amber-tint:#33290b;--code-bg:#090d14;--ask:#78a9ff;--plan:#be95ff;--agent:#42be65}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{font-family:var(--sans);font-size:16px;line-height:1.75;color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased}
+a{color:var(--blue-deep)}:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+strong{font-weight:600}em{font-style:normal;color:var(--muted)}
+.utility-bar{display:none}
+.top-nav{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;height:56px;padding:0 clamp(16px,4vw,40px);background:color-mix(in srgb,var(--surface) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.logo{font-weight:600;font-size:18px;text-decoration:none;color:var(--ink)}.logo span{color:var(--blue)}
+.back-link{font-size:14px;text-decoration:none;color:var(--muted);padding:6px 14px;border-radius:999px;transition:background .2s,color .2s}
+.back-link:hover{background:var(--blue-tint);color:var(--blue-deep)}
+.page-content,.container,.page{max-width:920px;margin:0 auto;padding:0 clamp(16px,4vw,40px) 72px}
+/* hero */
+.hero,.doc-header,.header{padding:clamp(40px,7vw,72px) 0 36px;margin-bottom:12px;border-bottom:1px solid var(--line)}
+.header-top{display:flex}
+.hero-eyebrow{font-size:14px;color:var(--muted);margin-bottom:14px}
+h1{font-family:var(--serif);font-weight:900;font-size:clamp(30px,5.5vw,48px);line-height:1.25;letter-spacing:-.01em}
+.hero>p:not(.hero-eyebrow),.meta{margin-top:20px;max-width:40em;font-size:17px;color:var(--muted)}
+.meta{font-size:14px;line-height:1.8}.meta a{word-break:break-all}
+.scenario-tag{display:inline-block;margin-bottom:14px;padding:3px 14px;border-radius:999px;font-size:13px;font-weight:600;background:var(--blue-tint);color:var(--blue-deep)}
+.meta-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+/* badges & tags */
+.badge,.tag,.pill,.lang-badge,.vocab-cefr-badge,.tip-badge,.mode-badge,.review-pill{display:inline-block;font-size:12.5px;font-weight:600;line-height:1.5;padding:2px 12px;border-radius:999px;background:var(--blue-tint);color:var(--blue-deep)}
+.badge-cefr,.vocab-cefr-badge,.tag-cefr-c1,.tag-cefr-b2{background:var(--amber-tint);color:var(--amber)}
+.badge-lang,.tag-pos,.pill-agent{background:var(--green-tint);color:var(--green)}
+.badge-source,.pill-plan{background:var(--violet-tint);color:var(--violet)}
+.header .badge:first-child{background:var(--blue-tint);color:var(--blue-deep)}
+/* headings */
+.section-title,.fc-section-title,.cultural-title,.grammar-title{font-family:var(--serif);font-weight:700;line-height:1.35}
+.section-title{display:flex;align-items:baseline;justify-content:space-between;gap:16px;font-size:clamp(22px,3.5vw,28px);margin:56px 0 14px;padding-bottom:12px;border-bottom:2px solid var(--ink)}
+.section{margin-top:8px}.section>.section-title:first-child{margin-top:48px}
+.fc-section-title{font-size:20px;margin:32px 0 12px}
+.back-to-top{font:400 13px var(--sans);color:var(--muted);text-decoration:none;white-space:nowrap}
+h3{font-family:var(--serif);font-size:19px;font-weight:700;line-height:1.4}
+.section-desc{max-width:42em;color:var(--muted);margin-bottom:20px}
+p+p{margin-top:12px}
+code{font-family:var(--mono);font-size:.85em;background:var(--blue-tint);color:var(--blue-deep);padding:2px 7px;border-radius:4px}
+pre{font-family:var(--mono);font-size:13px;line-height:1.8;white-space:pre-wrap;word-break:break-word;overflow-x:auto}
+/* TOC */
+.toc{margin:28px 0;padding:20px 24px;background:var(--surface);border:1px solid var(--line);border-radius:14px}
+.toc-title{font-weight:600;margin-bottom:10px}
+.toc ol{list-style:none;display:grid;gap:6px}
+.toc li{display:flex;align-items:baseline;gap:10px}.toc a{text-decoration:none;font-weight:500}.toc a:hover{text-decoration:underline}
+.toc-num{display:inline-grid;place-items:center;width:22px;height:22px;margin-right:8px;border-radius:50%;background:var(--ink);color:var(--bg);font-size:12px;font-weight:600}
+.toc-sub{font-size:14px;color:var(--muted)}
+/* generic cards */
+.article-panel,.vocab-card,.grammar-card,.cultural-card,.demo-section,.mode-card,.prompt-showcase{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.vocab-card,.grammar-card,.cultural-card,.mode-card{margin:20px 0}
+/* callouts */
+.callout,.callout-tip,.tip-box,.review-tip,.source-box,.register-note,.confuse-box,.grammar-note,.summary-box,.vocab-hook{margin:20px 0;padding:16px 22px;background:var(--blue-tint);border-left:4px solid var(--blue);border-radius:4px 12px 12px 4px;font-size:15px}
+.tip-box,.callout-tip{display:flex;gap:14px;background:var(--green-tint);border-color:var(--green)}
+.review-tip,.grammar-note,.confuse-box{background:var(--amber-tint);border-color:var(--amber)}
+.source-box{background:var(--surface);border-color:var(--line);color:var(--muted);font-size:14px}
+.vocab-hook{margin:12px 0 0;padding:8px 14px;font-size:14px}
+.register-note{background:var(--violet-tint);border-color:var(--violet)}
+.summary-box dl{display:grid;grid-template-columns:7em 1fr;gap:10px 16px}.summary-box dt{font-weight:600}
+/* 01 article */
+.article-panel-header{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;padding:14px 22px;background:var(--ink);color:var(--bg);font-size:14px}
+.article-meta{opacity:.75}.article-body{padding:8px 22px 22px}
+.article-row{display:grid;grid-template-columns:9em 1fr;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+.label,.vocab-label,.grammar-section-label,.abstract-label,.expected-label,.demo-label{font-size:13px;font-weight:600;color:var(--muted)}
+.article-excerpt{margin-top:18px;background:var(--bg);border-radius:10px;overflow:hidden}
+.excerpt-header{display:flex;justify-content:space-between;align-items:center;padding:10px 16px;font-size:13px;font-weight:600;border-bottom:1px solid var(--line)}
+.article-excerpt pre{padding:16px;font-family:var(--serif);font-size:15px}
+.mode-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px;margin:20px 0}
+.mode-card{margin:0;padding:22px;border-top:4px solid var(--accent,var(--blue))}
+.ask{--accent:var(--ask)}.plan{--accent:var(--plan)}.agent{--accent:var(--agent)}
+.mode-badge{background:var(--accent);color:var(--surface);margin-bottom:10px}
+.mode-card .desc{margin:8px 0 12px;font-size:15px;color:var(--muted)}
+.tag-row{display:flex;flex-wrap:wrap;gap:6px}.permission{margin-top:12px;font-size:13.5px;color:var(--muted)}
+.workflow-steps{display:flex;align-items:stretch;gap:10px;margin:28px 0;flex-wrap:wrap}
+.workflow-step{flex:1;min-width:150px;padding:16px;background:var(--surface);border:1px solid var(--line);border-bottom:4px solid var(--accent);border-radius:12px}
+.step-num{font-size:12.5px;color:var(--muted)}.step-mode{font-weight:700;color:var(--accent);margin:2px 0 6px}.step-desc{font-size:14px;color:var(--muted);line-height:1.6}
+.workflow-arrow{align-self:center;color:var(--muted);font-size:20px}
+.tip-badge{background:var(--green);color:var(--surface);align-self:flex-start;white-space:nowrap}
+/* prompts */
+.demo-section{margin:28px 0;padding:24px}.demo-label{margin-bottom:10px;color:var(--blue-deep)}
+.prompt-block,.prompt-showcase{border-radius:12px;overflow:hidden;background:var(--code-bg);color:var(--code-ink)}
+.prompt-showcase{margin:20px 0;border:0}
+.prompt-block-header,.prompt-header-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 16px 10px 20px;background:linear-gradient(90deg,#2a1a52,#1a1f3a);color:#e9defd;font-size:13.5px;font-weight:500}
+.prompt-block pre,.prompt-text,.prompt-block>div:not(.prompt-block-header){padding:18px 22px;font-family:var(--mono);font-size:13.5px;line-height:1.85;white-space:pre-wrap;display:block}
+.prompt-text{color:var(--code-ink)}
+.copy-btn{font:600 13px var(--sans);color:#fff;background:var(--violet);border:0;border-radius:999px;padding:6px 16px;cursor:pointer;transition:background .2s,transform .12s}
+.copy-btn:hover{background:#8a3ffc}.copy-btn:active{transform:scale(.96)}.copy-btn.copied{background:#198038}
+.response-header{padding:10px 20px;background:var(--surface);color:var(--muted);font-size:13px;font-weight:600;border-top:1px solid var(--line)}
+.response-content{padding:16px 22px;background:var(--surface);color:var(--ink);font-size:15px}
+.expected-label{margin:18px 0 8px}.expected{padding:16px 20px;background:var(--bg);border-radius:10px;font-size:15px}
+.output-block{margin-top:12px;padding:16px 20px;background:var(--bg);border-radius:10px;font-size:15px}
+.word{font-family:var(--serif);font-size:20px;font-weight:700}.ipa,.vocab-ipa,.fc-ipa,.flash-ipa{font-family:var(--mono);font-size:13px;color:var(--muted)}
+.meaning{margin:4px 0}.example{font-size:14px;color:var(--muted)}
+.path-badge{display:inline-flex;align-items:center;gap:10px;margin-bottom:16px;padding:6px 8px 6px 14px;background:var(--surface);border:1px solid var(--line);border-radius:999px;font-size:13px}
+.pb-label{color:var(--muted)}.pb-path{font-family:var(--mono);background:var(--code-bg);color:var(--code-ink);padding:2px 12px;border-radius:999px}
+/* tables */
+table{width:100%;border-collapse:collapse;margin:16px 0;background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:15px}
+.carbon-table,.flash-table{display:table}
+th{text-align:left;font-size:13px;font-weight:600;color:var(--muted);background:var(--bg);padding:12px 16px}
+td{padding:12px 16px;border-top:1px solid var(--line);vertical-align:top}
+.flash-word,.fc-word{font-family:var(--serif);font-weight:700;font-size:17px}.pos{font-size:12px;color:var(--green);font-weight:600;margin-left:6px}
+/* 03 vocab / grammar */
+.vocab-card-header,.grammar-card-header{display:flex;align-items:baseline;flex-wrap:wrap;gap:12px;padding:16px 22px;background:var(--bg);border-bottom:1px solid var(--line)}
+.grammar-card-header{font-family:var(--serif);font-weight:700;line-height:1.5}
+.vocab-word{font-family:var(--serif);font-size:22px;font-weight:700}
+.vocab-card-body,.grammar-card-body{padding:18px 22px}
+.vocab-row{display:grid;grid-template-columns:5.5em 1fr;gap:12px;padding:8px 0}
+.example-block,.vocab-example{margin:12px 0;padding:12px 16px;border-left:3px solid var(--line);background:var(--bg);border-radius:0 8px 8px 0;font-size:15px}
+.orig{font-weight:500}.trans{color:var(--muted);font-size:14px;margin-top:4px}.orig strong,.vocab-example em,.highlight{background:var(--amber-tint);color:var(--ink);padding:0 4px;border-radius:3px}
+.colloc-list{list-style:none;display:grid;gap:4px;font-size:14.5px;margin:10px 0}.colloc-term,.col-item strong,.trap-key{font-weight:600;color:var(--blue-deep)}
+.grammar-quote,.grammar-sentence{margin:4px 0 16px;padding:14px 18px;font-family:var(--serif);font-size:17px;line-height:1.8;background:var(--blue-tint);border-radius:10px}
+.grammar-section-label{margin:16px 0 6px}.struct-list{margin-left:1.2em;font-size:15px}
+.grammar-rule,.analogy-block,.grammar-analogy{margin-top:12px;font-size:15px}.analogy-block,.grammar-analogy{padding:12px 16px;background:var(--bg);border-radius:10px;color:var(--muted)}
+.culture-item{margin:16px 0;padding:16px 20px;background:var(--surface);border:1px solid var(--line);border-radius:12px}.culture-item-title{font-weight:700;margin-bottom:6px}
+/* 04 */
+.abstract-box{padding:18px 22px;background:var(--surface);border:1px solid var(--line);border-radius:12px;font-family:var(--serif);font-size:16px;line-height:1.9}
+.abstract-box+.abstract-box,.abstract-label{margin-top:14px}.abstract-box.zh{font-family:var(--sans);font-size:14px;color:var(--muted)}
+.vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px;margin:20px 0}
+.vocab-grid .vocab-card{margin:0;padding:20px}.vocab-meta{display:flex;gap:6px;margin:8px 0}.vocab-zh{font-weight:600;margin-bottom:8px}.vocab-collocations{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:14px;margin-top:10px}
+.cultural-card{padding:20px 24px}.cultural-title{margin-bottom:10px;font-size:18px}.idiom-row{display:flex;flex-wrap:wrap;gap:6px 16px;padding:8px 0;border-top:1px solid var(--line)}.idiom-en{font-family:var(--serif);font-weight:700}.idiom-zh{color:var(--muted);font-size:15px}
+.trap-row{padding:10px 0;border-top:1px solid var(--line);font-size:15px}
+.review-schedule{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0}.review-pill{background:var(--surface);border:1px solid var(--line);color:var(--ink);font-weight:500;padding:6px 16px}
+.p04 .grammar-card{padding:20px 24px}.p04 .grammar-title{margin-bottom:12px;font-size:18px}.p04 .grammar-note{margin:12px 0 0}
+/* cta & footer */
+.cta-banner{margin-top:56px;padding:32px;text-align:center;background:var(--code-bg);color:var(--code-ink);border-radius:16px}
+.cta-link{display:inline-block;padding:10px 24px;border-radius:999px;background:var(--blue);color:#fff;text-decoration:none;font-weight:600}
+.cta-link:hover{background:var(--blue-deep)}
+.footer,footer{padding:36px 16px 48px;text-align:center;font-size:13px;color:var(--muted);border-top:1px solid var(--line)}
+@media(max-width:640px){.article-row,.vocab-row,.summary-box dl{grid-template-columns:1fr;gap:2px}.workflow-arrow{display:none}.section-title{flex-wrap:wrap}table{display:block;overflow-x:auto}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
 </style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;600&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@500;700;900&display=swap">
 </head>
-<body>
+<body class="p04">
+<nav class="top-nav"><a class="logo" href="index.html">IBM <span>Bob</span></a><a class="back-link" href="index.html">← 回作品列表</a></nav>
+<main class="page">
 
 
 <div class="header">
@@ -167,7 +170,7 @@
     To address the problem, this study collected nearly 1,000 cyclic triaxial test records from 23 academic papers and established multiple machine learning models to predict CSR. The study <strong>is divided into</strong> three main parts: data preprocessing and feature engineering (including missing value <strong>imputation</strong>); model development using seven supervised models; and binary classification with model <strong>interpretability</strong> and prediction uncertainty analysis. <strong>The results show that</strong> CatBoost, XGBoost, and Random Forest achieved the best overall performance. MICE produced the most stable imputation outcomes. EBM provided interpretable visualizations, while BNN offered prediction intervals that helped <strong>quantify uncertainty</strong>.
   </div>
   <div class="abstract-label" style="margin-top:10px">🇹🇼 中文原文摘要</div>
-  <div class="abstract-box zh" style="font-size:12px;color:#57606a">
+  <div class="abstract-box zh">
     土壤液化一直是大地工程領域長期關注的重要議題。動態三軸試驗為模擬地震載重下研究土壤行為的主要試驗，其中循環剪應力比（CSR）的設定往往依賴試體的物理性質、試驗條件和試驗者的經驗。本研究蒐集近千筆試驗資料，建立多種機器學習模型協助預測 CSR。結果顯示 CatBoost、XGBoost 與 Random Forest 整體表現最佳；MICE 為最穩定補值方式；EBM 提供可解釋性，BNN 量化預測不確定性。
   </div>
 </div>
@@ -224,7 +227,7 @@
 
     <div class="vocab-card">
       <div><span class="vocab-word">coefficient of determination</span></div>
-      <div class="vocab-meta"><span class="tag tag-pos">n. phr.</span><span class="tag tag-cefr-c1">C1</span><span class="tag" style="background:#dcfce7;color:#166534">R²</span></div>
+      <div class="vocab-meta"><span class="tag tag-pos">n. phr.</span><span class="tag tag-cefr-c1">C1</span><span class="tag">R²</span></div>
       <div class="vocab-zh">決定係數 — 模型解釋目標變數變異的比例（0–1）</div>
       <div class="vocab-example"><span class="en">Evaluated using the <em>coefficient of determination</em> (R²).</span><br />以決定係數 R² 評估模型效能。</div>
       <div class="vocab-collocations"><span class="col-item"><strong>R² score</strong> R² 分數</span> · <span class="col-item"><strong>achieve a high R²</strong></span></div>
@@ -242,7 +245,7 @@
 
     <div class="vocab-card">
       <div><span class="vocab-word">uncertainty quantification</span></div>
-      <div class="vocab-meta"><span class="tag tag-pos">n. phr.</span><span class="tag tag-cefr-c1">C1</span><span class="tag" style="background:#f3e8ff;color:#6b21a8">UQ</span></div>
+      <div class="vocab-meta"><span class="tag tag-pos">n. phr.</span><span class="tag tag-cefr-c1">C1</span><span class="tag">UQ</span></div>
       <div class="vocab-zh">不確定性量化 — 數值化模型預測的不確定程度</div>
       <div class="vocab-example"><span class="en">BNN offered intervals to <em>quantify uncertainty</em>.</span><br />BNN 提供區間以量化不確定性。</div>
       <div class="vocab-collocations"><span class="col-item"><strong>prediction uncertainty</strong> 預測不確定性</span> · <span class="col-item"><strong>uncertainty analysis</strong></span></div>
@@ -262,7 +265,7 @@
       <span class="highlight">However</span>, the appropriate CSR value <span class="highlight">often depends on</span> the specimen's physical properties, the experimental conditions, <span class="highlight">and</span> the experience of the test operator.
     </div>
     <div class="grammar-rule">📌 <strong>However</strong> 置句首作轉折，後加逗號。<strong>depend on</strong> 為不可分動詞片語。三元並列用 Oxford comma（最後 and 前加逗號），是學術英文標準。</div>
-    <div class="grammar-analogy">✏️ <em>However, the optimal learning rate often depends on the dataset size, the model architecture, and the chosen optimizer.</em><br /><span style="color:#57606a;font-size:12px">然而，最佳學習率往往取決於資料集大小、模型架構以及優化演算法。</span></div>
+    <div class="grammar-analogy">✏️ <em>However, the optimal learning rate often depends on the dataset size, the model architecture, and the chosen optimizer.</em><br /><span>然而，最佳學習率往往取決於資料集大小、模型架構以及優化演算法。</span></div>
     <div class="grammar-note">⚠️ 口語用 But；學術寫作用 However / Nevertheless / Nonetheless</div>
   </div>
 
@@ -272,7 +275,7 @@
       The study <span class="highlight">is divided into</span> three main parts. The first part <span class="highlight">involves</span> data preprocessing and feature engineering, <span class="highlight">including</span> missing value imputation, numerical variable standardization, and categorical variable encoding.
     </div>
     <div class="grammar-rule">📌 <strong>be divided into</strong> 為學術摘要常用被動式，強調結構而非執行者。<strong>including</strong> 引導補充例子，前加逗號。</div>
-    <div class="grammar-analogy">✏️ <em>The experiment is divided into four stages. The first stage involves sample preparation, including mixing, compaction, and saturation.</em><br /><span style="color:#57606a;font-size:12px">實驗分為四個階段。第一階段涉及試樣製備，包括混合、壓實和飽和。</span></div>
+    <div class="grammar-analogy">✏️ <em>The experiment is divided into four stages. The first stage involves sample preparation, including mixing, compaction, and saturation.</em><br /><span>實驗分為四個階段。第一階段涉及試樣製備，包括混合、壓實和飽和。</span></div>
     <div class="grammar-note">⚠️ 口語可說 split into / broken down into；正式學術偏用 divided into</div>
   </div>
 
@@ -282,7 +285,7 @@
       <span class="highlight">The results show that</span> CatBoost, XGBoost, and Random Forest achieved the best overall performance. <span class="highlight">Moreover</span>, the models were able to make accurate predictions using only a set of primary features.
     </div>
     <div class="grammar-rule">📌 <strong>show that</strong> 引導 that 子句報告核心發現。<strong>Moreover / Furthermore / In addition</strong> 置句首加逗號表遞進。<strong>using only</strong> 為分詞片語，強調「僅需」。</div>
-    <div class="grammar-analogy">✏️ <em>The results indicate that the proposed model achieved the highest accuracy. Furthermore, it classified unseen samples using only three features.</em><br /><span style="color:#57606a;font-size:12px">結果顯示所提出的模型達到最高精度。此外，僅用三個特徵即可分類未見樣本。</span></div>
+    <div class="grammar-analogy">✏️ <em>The results indicate that the proposed model achieved the highest accuracy. Furthermore, it classified unseen samples using only three features.</em><br /><span>結果顯示所提出的模型達到最高精度。此外，僅用三個特徵即可分類未見樣本。</span></div>
     <div class="grammar-note">⚠️ 學術寫作偏用 show / indicate / suggest，避免 prove（過於強烈）</div>
   </div>
 </div>
@@ -335,10 +338,11 @@
 <div class="source-box">
   <strong>📄 原始文獻</strong><br />
   蘇筱丰（Su, Hsiao-Feng）（2025）。應用機器學習於動態三軸試驗資料預測液化循環剪應力比。國立臺灣大學土木工程學系碩士論文。指導教授：葛宇甯（Louis Ge）博士。<br />
-  DOI: <a href="https://doi.org/10.6342/NTU202502436" style="color:#3b82d4">10.6342/NTU202502436</a> ｜
-  PDF: <a href="https://tdr.lib.ntu.edu.tw/retrieve/5f9a45a1-814a-4ff0-bf0c-a003c0c85900/ntu-113-2.pdf" style="color:#3b82d4">TDR 全文下載</a>
+  DOI: <a href="https://doi.org/10.6342/NTU202502436">10.6342/NTU202502436</a> ｜
+  PDF: <a href="https://tdr.lib.ntu.edu.tw/retrieve/5f9a45a1-814a-4ff0-bf0c-a003c0c85900/ntu-113-2.pdf">TDR 全文下載</a>
 </div>
 
+</main>
 <div class="footer">Made with IBM Bob</div>
 
 </body>
