@@ -1,0 +1,345 @@
+
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Academic English Cheatsheet — ML &amp; Geotechnical Engineering</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, "Segoe UI", system-ui, sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    background: #ffffff;
+    color: #1f2328;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 32px 24px 48px;
+  }
+
+  /* Header */
+  .header { border-bottom: 2px solid #e5e7eb; padding-bottom: 20px; margin-bottom: 28px; }
+  .header-top { display: flex; align-items: flex-start; gap: 16px; flex-wrap: wrap; }
+  .badge { background: #3b82d4; color: #fff; font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 4px; white-space: nowrap; }
+  .badge-cefr { background: #7c5cd8; }
+  .badge-lang { background: #16a34a; }
+  h1 { font-size: 20px; font-weight: 700; color: #1f2328; line-height: 1.35; margin-bottom: 8px; }
+  .meta { font-size: 12px; color: #57606a; margin-top: 8px; }
+  .meta a { color: #3b82d4; text-decoration: none; }
+  .meta a:hover { text-decoration: underline; }
+
+  /* Section titles */
+  .section { margin-bottom: 32px; }
+  .section-title {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #57606a;
+    border-bottom: 1px solid #e5e7eb;
+    padding-bottom: 6px;
+    margin-bottom: 16px;
+  }
+
+  /* Abstract */
+  .abstract-box {
+    background: #f7f8fa;
+    border-left: 3px solid #3b82d4;
+    padding: 14px 16px;
+    border-radius: 0 6px 6px 0;
+    font-size: 13px;
+    margin-bottom: 12px;
+  }
+  .abstract-box.zh { border-left-color: #e5e7eb; }
+  .abstract-label { font-size: 11px; font-weight: 600; color: #57606a; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.05em; }
+
+  /* Vocab cards */
+  .vocab-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 560px) { .vocab-grid { grid-template-columns: 1fr; } }
+  .vocab-card {
+    background: #f7f8fa;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 14px 16px;
+  }
+  .vocab-word { font-size: 16px; font-weight: 700; color: #1f2328; }
+  .vocab-ipa { font-size: 12px; color: #57606a; font-style: italic; margin-left: 4px; }
+  .vocab-meta { display: flex; gap: 6px; margin: 6px 0 8px; flex-wrap: wrap; }
+  .tag { font-size: 11px; padding: 2px 7px; border-radius: 10px; font-weight: 600; }
+  .tag-pos { background: #e0e7ff; color: #3730a3; }
+  .tag-cefr-b2 { background: #fef3c7; color: #92400e; }
+  .tag-cefr-c1 { background: #fee2e2; color: #991b1b; }
+  .vocab-zh { font-size: 13px; color: #1f2328; margin-bottom: 8px; font-weight: 500; }
+  .vocab-example { font-size: 12px; color: #57606a; font-style: italic; border-left: 2px solid #e5e7eb; padding-left: 8px; margin-bottom: 8px; }
+  .vocab-example .en { color: #1f2328; }
+  .vocab-collocations { font-size: 12px; }
+  .vocab-collocations .col-item { color: #57606a; }
+  .vocab-collocations .col-item strong { color: #3b82d4; font-style: italic; }
+  .vocab-hook { font-size: 12px; color: #57606a; background: #fffbeb; border: 1px solid #fde68a; border-radius: 4px; padding: 4px 8px; margin-top: 6px; }
+
+  /* Grammar */
+  .grammar-card {
+    background: #f7f8fa;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 14px;
+  }
+  .grammar-title { font-size: 13px; font-weight: 700; color: #3b82d4; margin-bottom: 10px; }
+  .grammar-sentence {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    padding: 10px 12px;
+    font-size: 13px;
+    font-style: italic;
+    margin-bottom: 10px;
+    color: #1f2328;
+  }
+  .grammar-sentence .highlight { background: #fef9c3; padding: 1px 2px; border-radius: 2px; font-style: normal; font-weight: 600; }
+  .grammar-rule { font-size: 12px; color: #57606a; margin-bottom: 8px; }
+  .grammar-analogy { font-size: 12px; background: #f0fdf4; border-left: 3px solid #16a34a; padding: 8px 10px; border-radius: 0 4px 4px 0; }
+  .grammar-note { font-size: 11px; color: #7c5cd8; margin-top: 6px; font-style: italic; }
+
+  /* Cultural */
+  .cultural-card {
+    background: #f7f8fa;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+  }
+  .cultural-title { font-size: 12px; font-weight: 700; color: #57606a; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; }
+  .idiom-row { display: flex; gap: 10px; margin-bottom: 6px; flex-wrap: wrap; }
+  .idiom-en { font-style: italic; font-weight: 600; color: #3b82d4; min-width: 140px; }
+  .idiom-zh { color: #1f2328; font-size: 13px; }
+  .trap-row { font-size: 12px; margin-bottom: 5px; }
+  .trap-row .trap-key { font-weight: 700; color: #991b1b; }
+
+  /* Flashcards */
+  .flash-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .flash-table th { background: #f7f8fa; color: #57606a; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; padding: 8px 12px; border: 1px solid #e5e7eb; }
+  .flash-table td { padding: 9px 12px; border: 1px solid #e5e7eb; vertical-align: top; }
+  .flash-table tr:nth-child(even) td { background: #fafbfc; }
+  .flash-word { font-weight: 700; color: #1f2328; }
+  .flash-ipa { font-style: italic; color: #57606a; font-size: 11px; }
+  .flash-def { color: #1f2328; }
+  .flash-def .pos { color: #7c5cd8; font-size: 11px; font-weight: 600; }
+  .review-schedule { display: flex; gap: 10px; margin-bottom: 14px; flex-wrap: wrap; }
+  .review-pill { font-size: 11px; background: #f7f8fa; border: 1px solid #e5e7eb; border-radius: 20px; padding: 4px 12px; color: #57606a; }
+  .review-pill span { font-weight: 700; color: #1f2328; }
+
+  /* Source box */
+  .source-box { background: #f7f8fa; border: 1px solid #e5e7eb; border-radius: 6px; padding: 12px 16px; font-size: 12px; color: #57606a; }
+  .source-box strong { color: #1f2328; }
+
+  /* Footer */
+  .footer { text-align: center; font-size: 12px; color: #57606a; border-top: 1px solid #e5e7eb; padding-top: 16px; margin-top: 40px; }
+</style>
+</head>
+<body>
+
+
+<div class="header">
+  <div class="header-top">
+    <div style="flex:1">
+      <div style="display:flex;gap:6px;margin-bottom:8px;flex-wrap:wrap">
+        <span class="badge">Academic English</span>
+        <span class="badge badge-cefr">CEFR B2–C1</span>
+        <span class="badge badge-lang">English Learning</span>
+      </div>
+      <h1>學術英文學習單<br />ML &amp; Geotechnical Engineering</h1>
+      <div class="meta">
+        取自：蘇筱丰（2025）。<em>應用機器學習於動態三軸試驗資料預測液化循環剪應力比</em>。國立臺灣大學碩士論文。<br />
+        DOI: <a href="https://doi.org/10.6342/NTU202502436" target="_blank">10.6342/NTU202502436</a> ｜
+        PDF: <a href="https://tdr.lib.ntu.edu.tw/retrieve/5f9a45a1-814a-4ff0-bf0c-a003c0c85900/ntu-113-2.pdf" target="_blank">TDR Full Text</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="section">
+  <div class="section-title">📰 原文摘要 Abstract</div>
+  <div class="abstract-label">🌐 English (學習語料)</div>
+  <div class="abstract-box">
+    Soil liquefaction has long been a <strong>critical issue</strong> in <strong>geotechnical engineering</strong>. Among the laboratory methods developed to investigate this phenomenon, the cyclic triaxial test is one of the most important experiments for <strong>simulating soil behavior</strong> under earthquake loading. A key parameter in this test is the Cyclic Stress Ratio (CSR), which reflects the magnitude of loading energy applied to the soil specimen. However, the appropriate CSR value often <strong>depends on</strong> the specimen's physical properties, the experimental conditions, and the experience of the test operator.<br /><br />
+    To address the problem, this study collected nearly 1,000 cyclic triaxial test records from 23 academic papers and established multiple machine learning models to predict CSR. The study <strong>is divided into</strong> three main parts: data preprocessing and feature engineering (including missing value <strong>imputation</strong>); model development using seven supervised models; and binary classification with model <strong>interpretability</strong> and prediction uncertainty analysis. <strong>The results show that</strong> CatBoost, XGBoost, and Random Forest achieved the best overall performance. MICE produced the most stable imputation outcomes. EBM provided interpretable visualizations, while BNN offered prediction intervals that helped <strong>quantify uncertainty</strong>.
+  </div>
+  <div class="abstract-label" style="margin-top:10px">🇹🇼 中文原文摘要</div>
+  <div class="abstract-box zh" style="font-size:12px;color:#57606a">
+    土壤液化一直是大地工程領域長期關注的重要議題。動態三軸試驗為模擬地震載重下研究土壤行為的主要試驗，其中循環剪應力比（CSR）的設定往往依賴試體的物理性質、試驗條件和試驗者的經驗。本研究蒐集近千筆試驗資料，建立多種機器學習模型協助預測 CSR。結果顯示 CatBoost、XGBoost 與 Random Forest 整體表現最佳；MICE 為最穩定補值方式；EBM 提供可解釋性，BNN 量化預測不確定性。
+  </div>
+</div>
+
+
+<div class="section">
+  <div class="section-title">📚 重點生詞卡 Key Vocabulary (8 words)</div>
+  <div class="vocab-grid">
+
+    <div class="vocab-card">
+      <div><span class="vocab-word">liquefaction</span><span class="vocab-ipa">/ˌlɪk.wɪˈfæk.ʃən/</span></div>
+      <div class="vocab-meta"><span class="tag tag-pos">n.</span><span class="tag tag-cefr-c1">C1</span></div>
+      <div class="vocab-zh">液化 — 土壤因地震失去承載能力呈流體狀</div>
+      <div class="vocab-example"><span class="en">Soil <em>liquefaction</em> has long been a critical issue in geotechnical engineering.</span><br />土壤液化長期是大地工程的關鍵議題。</div>
+      <div class="vocab-collocations"><span class="col-item"><strong>soil liquefaction</strong> 土壤液化</span> · <span class="col-item"><strong>liquefaction potential</strong> 液化潛能</span></div>
+      <div class="vocab-hook">💡 liquid（液體）+ -faction（使…化）</div>
+    </div>
+
+    <div class="vocab-card">
+      <div><span class="vocab-word">geotechnical</span><span class="vocab-ipa">/ˌdʒiː.oʊˈtek.nɪ.kəl/</span></div>
+      <div class="vocab-meta"><span class="tag tag-pos">adj.</span><span class="tag tag-cefr-c1">C1</span></div>
+      <div class="vocab-zh">大地工程的 — 研究土壤岩石力學的學科</div>
+      <div class="vocab-example"><span class="en">A critical issue in <em>geotechnical</em> engineering.</span><br />大地工程領域的關鍵議題。</div>
+      <div class="vocab-collocations"><span class="col-item"><strong>geotechnical engineering</strong> 大地工程</span> · <span class="col-item"><strong>geotechnical investigation</strong> 地工調查</span></div>
+      <div class="vocab-hook">💡 geo-（地球）+ technical（技術的）</div>
+    </div>
+
+    <div class="vocab-card">
+      <div><span class="vocab-word">imputation</span><span class="vocab-ipa">/ˌɪm.pjʊˈteɪ.ʃən/</span></div>
+      <div class="vocab-meta"><span class="tag tag-pos">n.</span><span class="tag tag-cefr-c1">C1</span></div>
+      <div class="vocab-zh">（缺失值）填補 — 以統計方法填入缺失資料</div>
+      <div class="vocab-example"><span class="en">Including missing value <em>imputation</em>, standardization, and encoding.</span><br />包括缺失值填補、標準化與編碼。</div>
+      <div class="vocab-collocations"><span class="col-item"><strong>missing value imputation</strong> 缺失值填補</span> · <span class="col-item"><strong>multiple imputation</strong> 多重插補</span></div>
+      <div class="vocab-hook">💡 impute ← 拉丁語 putare（計算）→ 向內填入估算值</div>
+    </div>
+
+    <div class="vocab-card">
+      <div><span class="vocab-word">hyperparameter</span><span class="vocab-ipa">/ˌhaɪ.pərˈpær.ə.ˌmiː.tər/</span></div>
+      <div class="vocab-meta"><span class="tag tag-pos">n.</span><span class="tag tag-cefr-c1">C1</span></div>
+      <div class="vocab-zh">超參數 — 訓練前人工設定的模型參數</div>
+      <div class="vocab-example"><span class="en">Manual <em>hyperparameter</em> tuning outperformed Grid search.</span><br />手動超參數調整優於格網搜尋。</div>
+      <div class="vocab-collocations"><span class="col-item"><strong>hyperparameter tuning</strong> 超參數調整</span> · <span class="col-item"><strong>tune hyperparameters</strong> 調整超參數</span></div>
+      <div class="vocab-hook">💡 hyper-（超越）+ parameter（參數）→ 在參數之上</div>
+    </div>
+
+    <div class="vocab-card">
+      <div><span class="vocab-word">interpretability</span><span class="vocab-ipa">/ɪnˌtɜː.prɪ.tə.ˈbɪl.ɪ.ti/</span></div>
+      <div class="vocab-meta"><span class="tag tag-pos">n.</span><span class="tag tag-cefr-c1">C1</span></div>
+      <div class="vocab-zh">可解釋性 — 模型預測可被人類理解的程度</div>
+      <div class="vocab-example"><span class="en">Incorporated model <em>interpretability</em> and uncertainty analysis.</span><br />納入了模型可解釋性與不確定性分析。</div>
+      <div class="vocab-collocations"><span class="col-item"><strong>model interpretability</strong> 模型可解釋性</span> · <span class="col-item"><strong>interpretability–accuracy trade-off</strong></span></div>
+      <div class="vocab-hook">💡 interpret（解釋）+ -ability（能力）→ 能被解釋的能力</div>
+    </div>
+
+    <div class="vocab-card">
+      <div><span class="vocab-word">coefficient of determination</span></div>
+      <div class="vocab-meta"><span class="tag tag-pos">n. phr.</span><span class="tag tag-cefr-c1">C1</span><span class="tag" style="background:#dcfce7;color:#166534">R²</span></div>
+      <div class="vocab-zh">決定係數 — 模型解釋目標變數變異的比例（0–1）</div>
+      <div class="vocab-example"><span class="en">Evaluated using the <em>coefficient of determination</em> (R²).</span><br />以決定係數 R² 評估模型效能。</div>
+      <div class="vocab-collocations"><span class="col-item"><strong>R² score</strong> R² 分數</span> · <span class="col-item"><strong>achieve a high R²</strong></span></div>
+      <div class="vocab-hook">💡 口語說 "R-squared"；R² 越接近 1 代表擬合越好</div>
+    </div>
+
+    <div class="vocab-card">
+      <div><span class="vocab-word">binary classification</span><span class="vocab-ipa">/ˈbaɪ.nər.i/</span></div>
+      <div class="vocab-meta"><span class="tag tag-pos">n. phr.</span><span class="tag tag-cefr-b2">B2</span></div>
+      <div class="vocab-zh">二元分類 — 將資料分為兩個類別的 ML 任務</div>
+      <div class="vocab-example"><span class="en">Converted the regression task into a <em>binary classification</em> problem.</span><br />將迴歸任務轉換為二元分類問題。</div>
+      <div class="vocab-collocations"><span class="col-item"><strong>binary classification task</strong></span> · <span class="col-item"><strong>binary classifier</strong> 二元分類器</span></div>
+      <div class="vocab-hook">💡 binary（只有 0 和 1）→ 只分兩類</div>
+    </div>
+
+    <div class="vocab-card">
+      <div><span class="vocab-word">uncertainty quantification</span></div>
+      <div class="vocab-meta"><span class="tag tag-pos">n. phr.</span><span class="tag tag-cefr-c1">C1</span><span class="tag" style="background:#f3e8ff;color:#6b21a8">UQ</span></div>
+      <div class="vocab-zh">不確定性量化 — 數值化模型預測的不確定程度</div>
+      <div class="vocab-example"><span class="en">BNN offered intervals to <em>quantify uncertainty</em>.</span><br />BNN 提供區間以量化不確定性。</div>
+      <div class="vocab-collocations"><span class="col-item"><strong>prediction uncertainty</strong> 預測不確定性</span> · <span class="col-item"><strong>uncertainty analysis</strong></span></div>
+      <div class="vocab-hook">💡 quantify（量化）+ uncertainty（不確定）→ 把不確定數字化</div>
+    </div>
+
+  </div>
+</div>
+
+
+<div class="section">
+  <div class="section-title">🔍 文法句型剖析 Grammar Patterns (3 patterns)</div>
+
+  <div class="grammar-card">
+    <div class="grammar-title">① However, S + often depends on + [A, B, and C]　— 學術轉折 + Oxford Comma</div>
+    <div class="grammar-sentence">
+      <span class="highlight">However</span>, the appropriate CSR value <span class="highlight">often depends on</span> the specimen's physical properties, the experimental conditions, <span class="highlight">and</span> the experience of the test operator.
+    </div>
+    <div class="grammar-rule">📌 <strong>However</strong> 置句首作轉折，後加逗號。<strong>depend on</strong> 為不可分動詞片語。三元並列用 Oxford comma（最後 and 前加逗號），是學術英文標準。</div>
+    <div class="grammar-analogy">✏️ <em>However, the optimal learning rate often depends on the dataset size, the model architecture, and the chosen optimizer.</em><br /><span style="color:#57606a;font-size:12px">然而，最佳學習率往往取決於資料集大小、模型架構以及優化演算法。</span></div>
+    <div class="grammar-note">⚠️ 口語用 But；學術寫作用 However / Nevertheless / Nonetheless</div>
+  </div>
+
+  <div class="grammar-card">
+    <div class="grammar-title">② The study is divided into N parts. The first part involves…, including…　— 論文結構說明</div>
+    <div class="grammar-sentence">
+      The study <span class="highlight">is divided into</span> three main parts. The first part <span class="highlight">involves</span> data preprocessing and feature engineering, <span class="highlight">including</span> missing value imputation, numerical variable standardization, and categorical variable encoding.
+    </div>
+    <div class="grammar-rule">📌 <strong>be divided into</strong> 為學術摘要常用被動式，強調結構而非執行者。<strong>including</strong> 引導補充例子，前加逗號。</div>
+    <div class="grammar-analogy">✏️ <em>The experiment is divided into four stages. The first stage involves sample preparation, including mixing, compaction, and saturation.</em><br /><span style="color:#57606a;font-size:12px">實驗分為四個階段。第一階段涉及試樣製備，包括混合、壓實和飽和。</span></div>
+    <div class="grammar-note">⚠️ 口語可說 split into / broken down into；正式學術偏用 divided into</div>
+  </div>
+
+  <div class="grammar-card">
+    <div class="grammar-title">③ The results show that S + achieved… Moreover, S + were able to…　— 結果報告 + 遞進</div>
+    <div class="grammar-sentence">
+      <span class="highlight">The results show that</span> CatBoost, XGBoost, and Random Forest achieved the best overall performance. <span class="highlight">Moreover</span>, the models were able to make accurate predictions using only a set of primary features.
+    </div>
+    <div class="grammar-rule">📌 <strong>show that</strong> 引導 that 子句報告核心發現。<strong>Moreover / Furthermore / In addition</strong> 置句首加逗號表遞進。<strong>using only</strong> 為分詞片語，強調「僅需」。</div>
+    <div class="grammar-analogy">✏️ <em>The results indicate that the proposed model achieved the highest accuracy. Furthermore, it classified unseen samples using only three features.</em><br /><span style="color:#57606a;font-size:12px">結果顯示所提出的模型達到最高精度。此外，僅用三個特徵即可分類未見樣本。</span></div>
+    <div class="grammar-note">⚠️ 學術寫作偏用 show / indicate / suggest，避免 prove（過於強烈）</div>
+  </div>
+</div>
+
+
+<div class="section">
+  <div class="section-title">🌏 文化語境 Cultural Context</div>
+  <div class="cultural-card">
+    <div class="cultural-title">慣用語 Idioms</div>
+    <div class="idiom-row"><span class="idiom-en">trial-and-error</span><span class="idiom-zh">試錯法——反覆嘗試找答案，無負面意涵；常見於工程設計與日常解決問題</span></div>
+    <div class="idiom-row"><span class="idiom-en">black box</span><span class="idiom-zh">黑箱——輸入輸出可觀察但內部不透明的模型；常與 interpretability 形成對比</span></div>
+  </div>
+  <div class="cultural-card">
+    <div class="cultural-title">⚠️ 中英翻譯陷阱 Translation Traps</div>
+    <div class="trap-row">中文「預測」→ <span class="trap-key">predict</span>（具體數值）/ <span class="trap-key">estimate</span>（估算）/ <span class="trap-key">forecast</span>（未來趨勢）—— 本論文用 predict（迴歸預測數值）</div>
+    <div class="trap-row">「決定係數」→ 正式寫 <span class="trap-key">coefficient of determination</span>，口頭說 <span class="trap-key">R-squared</span></div>
+    <div class="trap-row">「表現最佳」→ 學術寫 <span class="trap-key">achieved the best overall performance</span> 或 <span class="trap-key">outperformed</span>，避免 "is the best"（過於口語）</div>
+    <div class="trap-row">「學術語氣」→ 用 <span class="trap-key">show / indicate / suggest</span>，不用 prove（主張太強）</div>
+  </div>
+</div>
+
+
+<div class="section">
+  <div class="section-title">🔁 間隔複習閃卡 Spaced Repetition Flashcards</div>
+  <div class="review-schedule">
+    <div class="review-pill">📅 <span>當日</span> 複習</div>
+    <div class="review-pill">📅 <span>隔日</span> 複習</div>
+    <div class="review-pill">📅 <span>一週後</span> 複習</div>
+  </div>
+  <table class="flash-table">
+    <thead>
+      <tr><th>目標語言詞彙（IPA）</th><th>繁中釋義 + 詞性</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><span class="flash-word">liquefaction</span><br /><span class="flash-ipa">/ˌlɪk.wɪˈfæk.ʃən/</span></td><td><span class="flash-def">液化 <span class="pos">(n.)</span><br />土壤失去承載能力如液體般的現象</span></td></tr>
+      <tr><td><span class="flash-word">geotechnical</span><br /><span class="flash-ipa">/ˌdʒiː.oʊˈtek.nɪ.kəl/</span></td><td><span class="flash-def">大地工程的 <span class="pos">(adj.)</span><br />研究土壤岩石力學的學科</span></td></tr>
+      <tr><td><span class="flash-word">imputation</span><br /><span class="flash-ipa">/ˌɪm.pjʊˈteɪ.ʃən/</span></td><td><span class="flash-def">缺失值填補 <span class="pos">(n.)</span><br />統計推估填入缺失資料</span></td></tr>
+      <tr><td><span class="flash-word">hyperparameter</span><br /><span class="flash-ipa">/ˌhaɪ.pərˈpær.ə.ˌmiː.tər/</span></td><td><span class="flash-def">超參數 <span class="pos">(n.)</span><br />訓練前人工設定的模型參數</span></td></tr>
+      <tr><td><span class="flash-word">interpretability</span><br /><span class="flash-ipa">/ɪnˌtɜː.prɪ.tə.ˈbɪl.ɪ.ti/</span></td><td><span class="flash-def">可解釋性 <span class="pos">(n.)</span><br />模型預測可被人類理解的程度</span></td></tr>
+      <tr><td><span class="flash-word">coefficient of determination</span><br /><span class="flash-ipa">R²</span></td><td><span class="flash-def">決定係數 <span class="pos">(n. phr.)</span><br />模型解釋變異的比例（0–1）</span></td></tr>
+      <tr><td><span class="flash-word">binary classification</span><br /><span class="flash-ipa">/ˈbaɪ.nər.i/</span></td><td><span class="flash-def">二元分類 <span class="pos">(n. phr.)</span><br />將資料分為兩類的 ML 任務</span></td></tr>
+      <tr><td><span class="flash-word">uncertainty quantification</span><br /><span class="flash-ipa">/ʌnˈsɜː.tən.ti/</span></td><td><span class="flash-def">不確定性量化 <span class="pos">(n. phr.)</span><br />數值化預測不確定程度</span></td></tr>
+      <tr><td><span class="flash-word">outperform</span><br /><span class="flash-ipa">/ˌaʊt.pəˈfɔːm/</span></td><td><span class="flash-def">勝過、表現更優 <span class="pos">(v.)</span><br />超越他者的表現</span></td></tr>
+      <tr><td><span class="flash-word">preprocessing</span><br /><span class="flash-ipa">/ˌpriːˈprəʊ.ses.ɪŋ/</span></td><td><span class="flash-def">前處理 <span class="pos">(n.)</span><br />資料輸入模型前的準備工作</span></td></tr>
+    </tbody>
+  </table>
+</div>
+
+
+<div class="source-box">
+  <strong>📄 原始文獻</strong><br />
+  蘇筱丰（Su, Hsiao-Feng）（2025）。應用機器學習於動態三軸試驗資料預測液化循環剪應力比。國立臺灣大學土木工程學系碩士論文。指導教授：葛宇甯（Louis Ge）博士。<br />
+  DOI: <a href="https://doi.org/10.6342/NTU202502436" style="color:#3b82d4">10.6342/NTU202502436</a> ｜
+  PDF: <a href="https://tdr.lib.ntu.edu.tw/retrieve/5f9a45a1-814a-4ff0-bf0c-a003c0c85900/ntu-113-2.pdf" style="color:#3b82d4">TDR 全文下載</a>
+</div>
+
+<div class="footer">Made with IBM Bob</div>
+
+</body>
+</html>
