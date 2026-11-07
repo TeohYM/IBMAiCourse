@@ -5,465 +5,268 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>IBM Bob — AI Agents 工作流工作坊</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;600&display=swap">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;600&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@500;700;900&display=swap">
   <style>
+    :root {
+      --bg: #f6f7f9;
+      --surface: #ffffff;
+      --ink: #101828;
+      --muted: #566074;
+      --line: #dce1e9;
+      --blue: #0f62fe;
+      --blue-deep: #0043ce;
+      --blue-tint: #e8f0ff;
+      --violet: #6929c4;
+      --violet-tint: #f1ebff;
+      --code-bg: #101828;
+      --code-ink: #e6ebf5;
+      --st1: #0f62fe; --st2: #8a3ffc; --st3: #198038; --st4: #0072c3;
+      --serif: 'Noto Serif TC', 'Songti TC', 'PMingLiU', serif;
+      --sans: 'IBM Plex Sans', 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', 'Helvetica Neue', Arial, sans-serif;
+      --mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --bg: #0d121b; --surface: #151c28; --ink: #eef1f7; --muted: #9aa5b8;
+        --line: #263042; --blue: #78a9ff; --blue-deep: #a6c8ff; --blue-tint: #172848;
+        --violet: #be95ff; --violet-tint: #241a3d; --code-bg: #090d14;
+      }
+    }
+
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
+    html { scroll-behavior: smooth; scroll-padding-top: 72px; }
     body {
-      font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+      font-family: var(--sans);
       font-size: 16px;
-      font-weight: 400;
-      line-height: 1.5;
-      letter-spacing: 0.16px;
-      color: #161616;
-      background: #ffffff;
+      line-height: 1.75;
+      color: var(--ink);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
     }
+    a { color: inherit; }
+    :focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
 
-    /* Utility bar */
-    .utility-bar {
-      background: #f4f4f4;
-      color: #525252;
-      font-size: 12px;
-      letter-spacing: 0.32px;
-      line-height: 1.33;
-      height: 32px;
-      display: flex;
-      align-items: center;
-      padding: 0 32px;
-      border-bottom: 1px solid #e0e0e0;
-    }
-
-    /* Top nav */
+    /* ── Nav ── */
     .top-nav {
-      background: #ffffff;
-      border-bottom: 1px solid #e0e0e0;
-      height: 48px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 32px;
+      position: sticky; top: 0; z-index: 20;
+      display: flex; align-items: center; justify-content: space-between; gap: 24px;
+      height: 56px; padding: 0 clamp(16px, 4vw, 40px);
+      background: color-mix(in srgb, var(--surface) 88%, transparent);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
     }
-    .top-nav .logo {
-      font-size: 18px;
-      font-weight: 600;
-      color: #161616;
-      letter-spacing: 0;
-      text-decoration: none;
+    .logo { font-weight: 600; font-size: 18px; text-decoration: none; letter-spacing: -0.01em; }
+    .logo span { color: var(--blue); }
+    .nav-links { display: flex; gap: 4px; }
+    .nav-links a {
+      font-size: 14px; text-decoration: none; color: var(--muted);
+      padding: 6px 12px; border-radius: 999px;
+      transition: background .2s, color .2s;
     }
-    .top-nav .logo span { color: #0f62fe; }
+    .nav-links a:hover { background: var(--blue-tint); color: var(--blue-deep); }
 
-    /* Main content */
-    .page-content {
-      max-width: 1056px;
-      margin: 0 auto;
-      padding: 56px 40px 96px;
-    }
+    .page { max-width: 1040px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 40px); }
 
-    /* Hero */
-    .hero {
-      margin-bottom: 56px;
-      padding-bottom: 48px;
-      border-bottom: 1px solid #e0e0e0;
-    }
-    .hero-eyebrow {
-      font-size: 14px;
-      color: #525252;
-      letter-spacing: 0.16px;
-      line-height: 1.29;
-      margin-bottom: 12px;
-    }
+    /* ── Hero ── */
+    .hero { padding: clamp(48px, 9vw, 96px) 0 56px; }
+    .hero-eyebrow { font-size: 14px; color: var(--muted); margin-bottom: 20px; }
     .hero h1 {
-      font-size: 46px;
-      font-weight: 300;
+      font-family: var(--serif);
+      font-weight: 900;
+      font-size: clamp(38px, 7vw, 68px);
       line-height: 1.18;
-      color: #161616;
-      margin-bottom: 20px;
-      letter-spacing: -0.5px;
+      letter-spacing: -0.01em;
+      max-width: 12em;
     }
-    .hero p {
-      font-size: 18px;
-      color: #525252;
-      line-height: 1.6;
-      max-width: 680px;
+    .hero-lead { margin-top: 28px; max-width: 38em; font-size: 18px; color: var(--muted); }
+    .hero-lead strong { color: var(--ink); font-weight: 600; }
+
+    /* ── Pipeline (the memorable element) ── */
+    .pipeline {
+      list-style: none;
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+      margin-top: 48px; position: relative;
+    }
+    .pipeline::before {
+      content: ''; position: absolute; left: 12.5%; right: 12.5%; top: 17px; height: 2px;
+      background: linear-gradient(90deg, var(--st1), var(--st2), var(--st3), var(--st4));
+      opacity: .55;
+    }
+    .pipeline li { position: relative; text-align: center; padding: 0 8px; }
+    .pipeline .dot {
+      display: grid; place-items: center;
+      width: 36px; height: 36px; margin: 0 auto 14px;
+      border-radius: 50%; color: #fff; font-weight: 600; font-size: 15px;
+      border: 4px solid var(--bg);
+      box-shadow: 0 0 0 1px var(--line);
+      position: relative;
+    }
+    .pipeline li:nth-child(1) .dot { background: var(--st1); }
+    .pipeline li:nth-child(2) .dot { background: var(--st2); }
+    .pipeline li:nth-child(3) .dot { background: var(--st3); }
+    .pipeline li:nth-child(4) .dot { background: var(--st4); }
+    .pipeline b { display: block; font-size: 16px; font-weight: 600; }
+    .pipeline small { font-size: 13px; color: var(--muted); }
+
+    /* ── Sections ── */
+    section { padding: 56px 0; border-top: 1px solid var(--line); }
+    .section-head { margin-bottom: 28px; }
+    .section-head h2 {
+      font-family: var(--serif);
+      font-size: clamp(26px, 4vw, 34px);
+      font-weight: 700; line-height: 1.3;
+    }
+    .section-head p { margin-top: 8px; color: var(--muted); max-width: 40em; }
+    .prose { max-width: 40em; }
+    .prose p + p { margin-top: 14px; }
+    .prose strong { font-weight: 600; }
+
+    .callout {
+      margin-top: 32px; max-width: 46em;
+      padding: 22px 26px;
+      background: var(--blue-tint);
+      border-radius: 4px 14px 14px 4px;
+      border-left: 4px solid var(--blue);
+    }
+    .callout h3 { font-size: 16px; font-weight: 600; color: var(--blue-deep); margin-bottom: 8px; }
+    .callout p { font-size: 15px; }
+    .callout p + p { margin-top: 8px; }
+    .callout .hint { font-size: 14px; color: var(--muted); }
+    code.inline {
+      font-family: var(--mono); font-size: 13px;
+      background: var(--surface); color: var(--blue-deep);
+      padding: 2px 7px; border-radius: 4px; border: 1px solid var(--line);
     }
 
-    /* Workflow pills */
-    .workflow-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 28px;
+    /* ── Prompt / terminal block ── */
+    .prompt-box {
+      margin-top: 8px; border-radius: 14px; overflow: hidden;
+      background: var(--code-bg);
+      box-shadow: 0 0 0 1px var(--line), 0 18px 40px -24px rgba(16, 24, 40, .45);
     }
-    .workflow-pill {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      background: #f4f4f4;
-      border: 1px solid #e0e0e0;
-      padding: 6px 14px;
-      font-size: 13px;
-      color: #525252;
-      transition: transform 0.18s cubic-bezier(.4,0,.2,1), background 0.18s cubic-bezier(.4,0,.2,1);
+    .prompt-head {
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      padding: 12px 16px 12px 20px;
+      background: linear-gradient(90deg, #2a1a52, #1a1f3a);
+      color: #e9defd;
     }
-    .workflow-pill:hover { transform: scale(1.04); background: #e8e8e8; }
-    .workflow-pill .step-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
-    .dot-blue   { background: #0f62fe; }
-    .dot-purple { background: #8a3ffc; }
-    .dot-green  { background: #198038; }
-    .dot-teal   { background: #0072c3; }
-    .workflow-arrow { font-size: 16px; color: #8d8d8d; align-self: center; }
-
-    /* Section label (small caps, used inside sections) */
-    .section-label {
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.32px;
-      color: #525252;
-      text-transform: uppercase;
-      margin-bottom: 16px;
-    }
-
-    /* Section heading (large, numbered, left-border) */
-    .section-heading {
-      display: flex;
-      align-items: baseline;
-      gap: 16px;
-      padding-left: 18px;
-      border-left: 4px solid #0f62fe;
-      margin-bottom: 28px;
-    }
-    .section-heading .section-num {
-      font-size: 12px;
-      font-weight: 700;
-      color: #0f62fe;
-      letter-spacing: 0.5px;
-      white-space: nowrap;
-      text-transform: uppercase;
-    }
-    .section-heading h2 {
-      font-size: 26px;
-      font-weight: 600;
-      color: #161616;
-      line-height: 1.25;
-      margin: 0;
-    }
-
-    /* TOC bar */
-    .toc-bar {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0;
-      border: 1px solid #e0e0e0;
-      margin-top: 32px;
-      margin-bottom: 0;
-    }
-    .toc-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 14px 24px;
-      text-decoration: none;
-      color: #161616;
-      font-size: 14px;
-      font-weight: 400;
-      border-right: 1px solid #e0e0e0;
-      background: #f4f4f4;
-      flex: 1;
-      min-width: 180px;
-      transition: background 0.22s cubic-bezier(.4,0,.2,1), color 0.22s cubic-bezier(.4,0,.2,1), transform 0.22s cubic-bezier(.4,0,.2,1);
-    }
-    .toc-item:last-child { border-right: none; }
-    .toc-item:hover { background: #e0e0e0; color: #0f62fe; transform: translateY(-1px); }
-    .toc-item .toc-num {
-      font-size: 20px;
-      font-weight: 300;
-      color: #0f62fe;
-      line-height: 1;
-      flex-shrink: 0;
-    }
-    .toc-item .toc-label { line-height: 1.3; }
-    .toc-item .toc-label strong { display: block; font-weight: 600; font-size: 14px; }
-    .toc-item .toc-label span { font-size: 12px; color: #525252; }
-
-    /* Card grid */
-    .card-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 1px;
-      background: #e0e0e0;
-      border: 1px solid #e0e0e0;
-    }
-
-    .card {
-      background: #ffffff;
-      padding: 24px;
-      text-decoration: none;
-      color: inherit;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      transition: background 0.22s cubic-bezier(.4,0,.2,1), transform 0.22s cubic-bezier(.4,0,.2,1), box-shadow 0.22s cubic-bezier(.4,0,.2,1);
-    }
-    .card:hover { background: #f4f4f4; transform: translateY(-3px); box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
-
-    .card-eyebrow {
-      font-size: 12px;
-      letter-spacing: 0.32px;
-      color: #0f62fe;
-      line-height: 1.33;
-    }
-
-    .card h2 {
-      font-size: 20px;
-      font-weight: 400;
-      line-height: 1.40;
-      color: #161616;
-    }
-
-    .card p {
-      font-size: 14px;
-      color: #525252;
-      line-height: 1.35;
-      letter-spacing: 0.16px;
-    }
-
-    .card p:not(.card-eyebrow) {
-      flex: 1;
-    }
-
-    .card-cta {
-      font-size: 14px;
-      color: #0f62fe;
-      letter-spacing: 0.16px;
-      line-height: 1.29;
-      margin-top: 8px;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      transition: gap 0.2s cubic-bezier(.4,0,.2,1);
-    }
-    .card-cta::after { content: ' →'; transition: transform 0.2s cubic-bezier(.4,0,.2,1); display: inline-block; }
-    .card:hover .card-cta { gap: 8px; }
-
-    /* Footer */
-    footer {
-      background: #f4f4f4;
-      color: #525252;
-      font-size: 14px;
-      letter-spacing: 0.16px;
-      line-height: 1.29;
-      padding: 64px 32px;
-      text-align: center;
-      border-top: 1px solid #e0e0e0;
-      margin-top: 64px;
-    }
-    footer span { font-size: 12px; color: #8d8d8d; }
-
-    /* Callout box */
-    .callout-box {
-      margin-top: 24px;
-      border-left: 3px solid #0f62fe;
-      background: #edf4ff;
-      padding: 16px 20px;
-    }
-    .callout-label {
-      font-size: 13px;
-      font-weight: 600;
-      color: #0043ce;
-      margin-bottom: 8px;
-    }
-    .callout-box p {
-      font-size: 14px;
-      color: #393939;
-      line-height: 1.6;
-      margin-bottom: 0;
-    }
-    .callout-box p + p { margin-top: 8px; }
-    .callout-hint {
-      font-size: 13px;
-      color: #525252;
-    }
-    .callout-hint code {
-      font-family: 'IBM Plex Mono', 'Courier New', monospace;
-      font-size: 12px;
-      background: #d0e2ff;
-      color: #0043ce;
-      padding: 1px 5px;
-    }
-
-    /* Clone box */
-    .clone-box {
-      margin-top: 40px;
-      border: 1px solid #e0e0e0;
-      background: #f4f4f4;
-    }
-    .clone-box-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 16px 20px 12px;
-      border-bottom: 1px solid #e0e0e0;
-    }
-    .clone-box h3 {
-      font-size: 14px;
-      font-weight: 600;
-      letter-spacing: 0.32px;
-      color: #161616;
-      text-transform: uppercase;
-      margin: 0;
-    }
+    .prompt-head h3 { font-size: 14px; font-weight: 500; }
     .copy-btn {
-      font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.32px;
-      color: #0f62fe;
-      background: #ffffff;
-      border: 1px solid #0f62fe;
-      padding: 4px 12px;
-      cursor: pointer;
-      line-height: 1.5;
-      white-space: nowrap;
-      transition: background 0.18s cubic-bezier(.4,0,.2,1), color 0.18s cubic-bezier(.4,0,.2,1), transform 0.12s cubic-bezier(.4,0,.2,1);
+      font: 600 13px var(--sans);
+      color: #fff; background: var(--violet);
+      border: 0; border-radius: 999px; padding: 7px 16px; cursor: pointer;
+      transition: background .2s, transform .12s;
     }
-    .copy-btn:hover { background: #0f62fe; color: #ffffff; transform: scale(1.04); }
-    .copy-btn:active { transform: scale(0.97); }
-    .copy-btn.copied { color: #198038; border-color: #198038; background: #defbe6; }
-    .clone-box .prompt-text {
-      font-family: 'IBM Plex Mono', 'Courier New', monospace;
-      font-size: 13px;
-      color: #161616;
-      background: #f4f4f4;
-      padding: 16px 20px;
-      line-height: 1.7;
-      white-space: pre-wrap;
-      word-break: break-word;
-      margin: 0;
-      display: block;
+    .copy-btn:hover { background: #8a3ffc; }
+    .copy-btn:active { transform: scale(.96); }
+    .copy-btn.copied { background: #198038; }
+    .prompt-text {
+      display: block; padding: 22px 24px;
+      font-family: var(--mono); font-size: 13.5px; line-height: 1.85;
+      color: var(--code-ink);
+      white-space: pre-wrap; word-break: break-word; overflow-x: auto;
     }
 
-    /* AI prompt clone box variant */
-    .clone-box.ai-variant {
-      border-color: #e8daff;
-      background: #f6f2ff;
+    /* ── Materials ── */
+    .group + .group { margin-top: 40px; }
+    .group-title {
+      display: flex; align-items: center; gap: 12px;
+      font-size: 15px; font-weight: 600; margin-bottom: 16px;
     }
-    .clone-box.ai-variant .clone-box-header {
-      border-bottom-color: #e8daff;
-      background: #f6f2ff;
+    .group-title::after { content: ''; flex: 1; height: 1px; background: var(--line); }
+    .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+    .card {
+      display: flex; flex-direction: column; gap: 12px;
+      padding: 26px 26px 22px;
+      text-decoration: none;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      border-top: 4px solid var(--accent, var(--blue));
+      transition: border-color .2s, box-shadow .2s;
     }
-    .clone-box.ai-variant h3 { color: #6929c4; }
-    .clone-box.ai-variant .prompt-text {
-      background: #f6f2ff;
-      color: #21272a;
+    .card:hover { box-shadow: 0 12px 28px -16px rgba(16, 24, 40, .35); border-color: var(--accent, var(--blue)); }
+    .card.out { --accent: var(--violet); }
+    .tag {
+      align-self: flex-start;
+      font-size: 13px; font-weight: 500;
+      padding: 2px 12px; border-radius: 999px;
+      color: var(--blue-deep); background: var(--blue-tint);
     }
-    .clone-box.ai-variant .copy-btn {
-      color: #6929c4;
-      border-color: #6929c4;
-    }
-    .clone-box.ai-variant .copy-btn:hover { background: #6929c4; color: #ffffff; }
-    .clone-box.ai-variant .copy-btn.copied { color: #198038; border-color: #198038; background: #defbe6; }
-    .clone-box-divider {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-top: 16px;
-      font-size: 12px;
-      color: #8d8d8d;
-      letter-spacing: 0.32px;
-      text-transform: uppercase;
-    }
-    .clone-box-divider::before,
-    .clone-box-divider::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: #e0e0e0;
-    }
+    .card.out .tag { color: var(--violet); background: var(--violet-tint); }
+    .card h3 { font-family: var(--serif); font-size: 21px; font-weight: 700; line-height: 1.4; }
+    .card p { flex: 1; font-size: 15px; line-height: 1.7; color: var(--muted); }
+    .card-cta { font-size: 15px; font-weight: 600; color: var(--accent, var(--blue)); }
+    .card-cta::after { content: '→'; display: inline-block; margin-left: 6px; transition: transform .2s; }
+    .card:hover .card-cta::after { transform: translateX(4px); }
 
-    @media (max-width: 672px) {
-      .utility-bar { display: none; }
-      .page-content { padding: 40px 16px 64px; }
-      .hero h1 { font-size: 32px; }
-      .workflow-arrow { display: none; }
+    footer { padding: 40px 16px 56px; text-align: center; font-size: 13px; color: var(--muted); border-top: 1px solid var(--line); }
+
+    @media (max-width: 680px) {
+      .nav-links { display: none; }
+      .pipeline { grid-template-columns: 1fr; gap: 20px; }
+      .pipeline::before { left: 17px; right: auto; top: 18px; bottom: 18px; width: 2px; height: auto; }
+      .pipeline li { display: flex; align-items: center; gap: 14px; text-align: left; padding: 0; }
+      .pipeline .dot { margin: 0; flex-shrink: 0; }
+      .card-grid { grid-template-columns: 1fr; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition: none !important; }
     }
   </style>
 </head>
 <body>
 
-  <div class="utility-bar">IBM Bob · AI Agents 工作流工作坊</div>
-
-  <nav class="top-nav">
+  <nav class="top-nav" aria-label="主要導覽">
     <a class="logo" href="index.html">IBM <span>Bob</span></a>
+    <div class="nav-links">
+      <a href="#section-goal">核心目標</a>
+      <a href="#section-prep">準備工作</a>
+      <a href="#section-materials">全部教材</a>
+    </div>
   </nav>
 
-  <main class="page-content">
+  <main class="page">
 
-    <!-- ── 頁首：大標題 + TOC ── -->
-    <div style="padding-bottom: 40px; border-bottom: 1px solid #e0e0e0; margin-bottom: 56px;">
-      <p class="hero-eyebrow">教學材料總覽 · Workshop W05</p>
-      <h1 style="font-size: 42px; font-weight: 300; line-height: 1.20; color: #161616; margin-bottom: 0; margin-top: 12px;">AI Agents 工作流<br>工作坊教材</h1>
+    <header class="hero">
+      <p class="hero-eyebrow">Workshop W05 教學材料總覽</p>
+      <h1>AI Agents 工作流工作坊教材</h1>
+      <p class="hero-lead">用 IBM Bob 讓 AI 自動串接多個步驟、依序完成任務，<strong>不需要任何程式背景</strong>。以下是本工作坊示範的四步驟流程：</p>
 
-      <nav class="toc-bar" aria-label="頁面目錄">
-        <a class="toc-item" href="#section-goal">
-          <span class="toc-num">01</span>
-          <span class="toc-label"><strong>工作坊的核心目標</strong><span>了解本工作坊的學習方向</span></span>
-        </a>
-        <a class="toc-item" href="#section-prep">
-          <span class="toc-num">02</span>
-          <span class="toc-label"><strong>準備工作</strong><span>取得工作坊專案檔案</span></span>
-        </a>
-        <a class="toc-item" href="#section-materials">
-          <span class="toc-num">03</span>
-          <span class="toc-label"><strong>全部教材</strong><span>共 4 份學習材料</span></span>
-        </a>
-      </nav>
-    </div>
+      <ol class="pipeline" aria-label="四步驟工作流">
+        <li><span class="dot">1</span><b>語料獲取</b><small>閱讀外語新聞</small></li>
+        <li><span class="dot">2</span><b>語言分析</b><small>提取生詞與文法</small></li>
+        <li><span class="dot">3</span><b>知識庫寫入</b><small>存入 Obsidian</small></li>
+        <li><span class="dot">4</span><b>網頁發佈</b><small>產出學習報告</small></li>
+      </ol>
+    </header>
 
-    <!-- ── 區塊一：工作坊的核心目標 ── -->
-    <section id="section-goal" style="padding-bottom: 56px; border-bottom: 1px solid #e0e0e0; margin-bottom: 56px;">
-      <div class="section-heading">
-        <span class="section-num">01</span>
-        <h2>工作坊的核心目標</h2>
-      </div>
-      <p>本工作坊的核心目標，是帶你學會用 IBM Bob 打造屬於自己的 <strong>AI 工作流（Agentic Workflow）</strong>——讓 AI 自動串接多個步驟、依序完成任務，不需要任何程式背景即可上手。</p>
-
-      <p style="margin-top:12px; font-size:16px; color:#525252; line-height:1.5;">為了說明 AI 工作流的概念，本工作坊以「<strong>AI 外語自學系統</strong>」作為範例情境——從閱讀外語新聞、自動提取生詞與文法，到將學習成果存入 Obsidian 筆記庫，完整示範一條四步驟的自動化流程：</p>
-
-      <div class="workflow-row">
-        <div class="workflow-pill"><span class="step-dot dot-blue"></span>Step 1 語料獲取</div>
-        <span class="workflow-arrow">→</span>
-        <div class="workflow-pill"><span class="step-dot dot-purple"></span>Step 2 語言分析</div>
-        <span class="workflow-arrow">→</span>
-        <div class="workflow-pill"><span class="step-dot dot-green"></span>Step 3 知識庫寫入</div>
-        <span class="workflow-arrow">→</span>
-        <div class="workflow-pill"><span class="step-dot dot-teal"></span>Step 4 網頁發佈</div>
+    <section id="section-goal">
+      <div class="section-head"><h2>工作坊的核心目標</h2></div>
+      <div class="prose">
+        <p>本工作坊的核心目標，是帶你學會用 IBM Bob 打造屬於自己的 <strong>AI 工作流（Agentic Workflow）</strong>——讓 AI 自動串接多個步驟、依序完成任務，不需要任何程式背景即可上手。</p>
+        <p>為了說明 AI 工作流的概念，本工作坊以「<strong>AI 外語自學系統</strong>」作為範例情境——從閱讀外語新聞、自動提取生詞與文法，到將學習成果存入 Obsidian 筆記庫，完整示範一條四步驟的自動化流程。</p>
       </div>
 
-      <div class="callout-box">
-        <p class="callout-label">💡 學完之後，換你打造自己的工作流</p>
+      <aside class="callout">
+        <h3>💡 學完之後，換你打造自己的工作流</h3>
         <p>外語自學系統只是一個引路的範例。熟悉工作坊的內容之後，你可以輕易將同樣的思維套用到任何場景——無論是學術研究、文件整理、內容創作，或任何你能想到的應用，都可以用 IBM Bob 打造專屬的自動化工作流。</p>
-        <p class="callout-hint">本工作坊的示例工作流已完整記錄在專案根目錄的 <code>AGENTS.md</code>，可作為設計自己工作流的參考起點。</p>
-      </div>
+        <p class="hint">本工作坊的示例工作流已完整記錄在專案根目錄的 <code class="inline">AGENTS.md</code>，可作為設計自己工作流的參考起點。</p>
+      </aside>
     </section>
 
-    <!-- ── 區塊二：準備工作 ── -->
-    <section id="section-prep" style="padding-bottom: 56px; border-bottom: 1px solid #e0e0e0; margin-bottom: 56px;">
-      <div class="section-heading">
-        <span class="section-num">02</span>
+    <section id="section-prep">
+      <div class="section-head">
         <h2>準備工作</h2>
+        <p>取得工作坊專案檔案。所有教材與設定檔案都存放於 GitHub 專案中，請先將專案下載至你的電腦，才能跟著實作。將下方 prompt 貼給 IBM Bob（Agent 模式），AI 會自動幫你完成 Git 安裝與專案下載，全程不需要你自己輸入任何指令。</p>
       </div>
-      <p style="font-size: 16px; color: #161616; font-weight: 400; margin-bottom: 4px;">取得工作坊專案檔案</p>
-      <p style="font-size: 14px; color: #525252; line-height: 1.6; margin-bottom: 20px;">本工作坊所有教材與設定檔案均存放於 GitHub 專案中。在開始任何操作之前，請先將專案下載至你的電腦——這是能夠跟著工作坊內容實作的必要準備步驟。將以下 prompt 貼給 IBM Bob（Agent 模式），AI 會自動幫你完成 Git 安裝與專案下載，全程不需要你自己輸入任何指令。</p>
 
-      <div class="clone-box ai-variant">
-        <div class="clone-box-header">
+      <div class="prompt-box">
+        <div class="prompt-head">
           <h3>🤖 請 AI 幫你安裝 Git 並取得專案檔案</h3>
-          <button class="copy-btn" id="copyBtn2">複製 Prompt</button>
+          <button class="copy-btn" id="copyBtn2" type="button">複製 Prompt</button>
         </div>
         <code class="prompt-text" id="promptText2">請幫我完成以下兩件事，所有步驟都用命令列工具自動執行，不需要我另外開終端機：
 
@@ -480,66 +283,68 @@
       </div>
     </section>
 
-    <!-- ── 區塊三：全部教材 ── -->
     <section id="section-materials">
-      <div class="section-heading">
-        <span class="section-num">03</span>
-        <h2>全部教材（4）</h2>
+      <div class="section-head">
+        <h2>全部教材</h2>
+        <p>共 4 份學習材料：先從兩份教學開始，再看工作流自動產出的成果範例。</p>
       </div>
 
-    <div class="card-grid">
-      <a class="card" href="01-ibm-bob-basic-usage.html">
-        <p class="card-eyebrow">工作坊教材 · IBM Bob 入門</p>
-        <h2>IBM Bob 入門操作指南</h2>
-        <p>以「從外語新聞學單字」為情境，帶你走完 Ask（搞懂文章）、Plan（規劃學習筆記）、Agent（自動產出生詞卡）三種模式的完整操作流程。附實際 Prompt 範例與生詞卡產出示例，零程式背景也能輕鬆上手。</p>
-        <span class="card-cta">開始學習</span>
-      </a>
+      <div class="group">
+        <h3 class="group-title">工作坊教材</h3>
+        <div class="card-grid">
+          <a class="card" href="01-ibm-bob-basic-usage.html">
+            <span class="tag">IBM Bob 入門</span>
+            <h3>IBM Bob 入門操作指南</h3>
+            <p>以「從外語新聞學單字」為情境，帶你走完 Ask（搞懂文章）、Plan（規劃學習筆記）、Agent（自動產出生詞卡）三種模式的完整操作流程。附實際 Prompt 範例與生詞卡產出示例，零程式背景也能輕鬆上手。</p>
+            <span class="card-cta">開始學習</span>
+          </a>
+          <a class="card" href="02-bob-advanced-usage.html">
+            <span class="tag">IBM Bob 進階</span>
+            <h3>IBM Bob 進階功能設定</h3>
+            <p>深入掌握讓語言學習助手更強大的進階工具：語言學習專屬 Skills（language-learning、obsidian-cli、defuddle 等）、NetNewsWire 與 rss-reader MCP 新聞串接，以及 Bob Rules 行為規範持久化設定。</p>
+            <span class="card-cta">開始學習</span>
+          </a>
+        </div>
+      </div>
 
-      <a class="card" href="02-bob-advanced-usage.html">
-        <p class="card-eyebrow">工作坊教材 · IBM Bob 進階</p>
-        <h2>IBM Bob 進階功能設定</h2>
-        <p>深入掌握讓語言學習助手更強大的進階工具：語言學習專屬 Skills（language-learning、obsidian-cli、defuddle 等）、NetNewsWire 與 rss-reader MCP 新聞串接，以及 Bob Rules 行為規範持久化設定。</p>
-        <span class="card-cta">開始學習</span>
-      </a>
-
-      <a class="card" href="03-a-practical-guide-to-agentic-ai-in-higher-education.html">
-        <p class="card-eyebrow">工作流產出範例 · Agentic AI 應用</p>
-        <h2>高等教育中 Agentic AI 的實踐指南</h2>
-        <p>本頁為工作流最終產出範例，示範完整四步驟工作流（語料獲取 → 語言分析 → 知識庫寫入 → 網頁發佈）自動生成的 Cheatsheet 風格學習報告，以一篇探討 Agentic AI 在高等教育應用的英文文章為語料。</p>
-        <span class="card-cta">查看成果</span>
-      </a>
-
-      <a class="card" href="04-academic-english-cheatsheet-ml-geotechnical.html">
-        <p class="card-eyebrow">工作流產出範例 · Zotero + 學術英文</p>
-        <h2>學術英文學習單：ML × 大地工程</h2>
-        <p>以 Zotero MCP 從本地文獻庫讀取台大碩士論文（2025），經完整四步驟工作流自動生成的學術英文 Cheatsheet。涵蓋 8 張生詞卡（CEFR B2–C1）、3 個文法句型剖析、文化語境補充，與 10 張間隔複習閃卡。</p>
-        <span class="card-cta">查看成果</span>
-      </a>
-    </div>
+      <div class="group">
+        <h3 class="group-title">工作流產出範例</h3>
+        <div class="card-grid">
+          <a class="card out" href="03-a-practical-guide-to-agentic-ai-in-higher-education.html">
+            <span class="tag">Agentic AI 應用</span>
+            <h3>高等教育中 Agentic AI 的實踐指南</h3>
+            <p>本頁為工作流最終產出範例，示範完整四步驟工作流（語料獲取 → 語言分析 → 知識庫寫入 → 網頁發佈）自動生成的 Cheatsheet 風格學習報告，以一篇探討 Agentic AI 在高等教育應用的英文文章為語料。</p>
+            <span class="card-cta">查看成果</span>
+          </a>
+          <a class="card out" href="04-academic-english-cheatsheet-ml-geotechnical.html">
+            <span class="tag">Zotero + 學術英文</span>
+            <h3>學術英文學習單：ML × 大地工程</h3>
+            <p>以 Zotero MCP 從本地文獻庫讀取台大碩士論文（2025），經完整四步驟工作流自動生成的學術英文 Cheatsheet。涵蓋 8 張生詞卡（CEFR B2–C1）、3 個文法句型剖析、文化語境補充，與 10 張間隔複習閃卡。</p>
+            <span class="card-cta">查看成果</span>
+          </a>
+        </div>
+      </div>
     </section>
 
   </main>
 
+  <footer>Made with IBM Bob</footer>
+
   <script>
     (function () {
-      var btn2 = document.getElementById('copyBtn2');
-      var txt2 = document.getElementById('promptText2');
-      btn2.addEventListener('click', function () {
-        navigator.clipboard.writeText(txt2.innerText).then(function () {
-          btn2.textContent = '已複製 ✓';
-          btn2.classList.add('copied');
+      var btn = document.getElementById('copyBtn2');
+      var txt = document.getElementById('promptText2');
+      btn.addEventListener('click', function () {
+        navigator.clipboard.writeText(txt.innerText).then(function () {
+          btn.textContent = '已複製 ✓';
+          btn.classList.add('copied');
           setTimeout(function () {
-            btn2.textContent = '複製 Prompt';
-            btn2.classList.remove('copied');
+            btn.textContent = '複製 Prompt';
+            btn.classList.remove('copied');
           }, 2000);
         });
       });
     })();
   </script>
-
-  <footer>
-    <span>Made with IBM Bob</span>
-  </footer>
-
 </body>
 </html>
