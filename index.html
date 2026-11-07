@@ -56,13 +56,13 @@
     .page-content {
       max-width: 1056px;
       margin: 0 auto;
-      padding: 64px 32px 96px;
+      padding: 56px 40px 96px;
     }
 
     /* Hero */
     .hero {
-      margin-bottom: 48px;
-      padding-bottom: 40px;
+      margin-bottom: 56px;
+      padding-bottom: 48px;
       border-bottom: 1px solid #e0e0e0;
     }
     .hero-eyebrow {
@@ -73,25 +73,26 @@
       margin-bottom: 12px;
     }
     .hero h1 {
-      font-size: 42px;
+      font-size: 46px;
       font-weight: 300;
-      line-height: 1.20;
+      line-height: 1.18;
       color: #161616;
-      margin-bottom: 16px;
+      margin-bottom: 20px;
+      letter-spacing: -0.5px;
     }
     .hero p {
       font-size: 18px;
       color: #525252;
-      line-height: 1.5;
-      max-width: 760px;
+      line-height: 1.6;
+      max-width: 680px;
     }
 
     /* Workflow pills */
     .workflow-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 24px;
+      gap: 10px;
+      margin-top: 28px;
     }
     .workflow-pill {
       display: flex;
@@ -102,7 +103,9 @@
       padding: 6px 14px;
       font-size: 13px;
       color: #525252;
+      transition: transform 0.18s cubic-bezier(.4,0,.2,1), background 0.18s cubic-bezier(.4,0,.2,1);
     }
+    .workflow-pill:hover { transform: scale(1.04); background: #e8e8e8; }
     .workflow-pill .step-dot {
       width: 8px;
       height: 8px;
@@ -130,22 +133,23 @@
       display: flex;
       align-items: baseline;
       gap: 16px;
-      padding-left: 16px;
+      padding-left: 18px;
       border-left: 4px solid #0f62fe;
-      margin-bottom: 24px;
+      margin-bottom: 28px;
     }
     .section-heading .section-num {
-      font-size: 13px;
-      font-weight: 600;
+      font-size: 12px;
+      font-weight: 700;
       color: #0f62fe;
-      letter-spacing: 0.32px;
+      letter-spacing: 0.5px;
       white-space: nowrap;
+      text-transform: uppercase;
     }
     .section-heading h2 {
-      font-size: 24px;
+      font-size: 26px;
       font-weight: 600;
       color: #161616;
-      line-height: 1.3;
+      line-height: 1.25;
       margin: 0;
     }
 
@@ -171,10 +175,10 @@
       background: #f4f4f4;
       flex: 1;
       min-width: 180px;
-      transition: background 0.1s;
+      transition: background 0.22s cubic-bezier(.4,0,.2,1), color 0.22s cubic-bezier(.4,0,.2,1), transform 0.22s cubic-bezier(.4,0,.2,1);
     }
     .toc-item:last-child { border-right: none; }
-    .toc-item:hover { background: #e0e0e0; }
+    .toc-item:hover { background: #e0e0e0; color: #0f62fe; transform: translateY(-1px); }
     .toc-item .toc-num {
       font-size: 20px;
       font-weight: 300;
@@ -203,9 +207,9 @@
       display: flex;
       flex-direction: column;
       gap: 12px;
-      transition: background 0.1s;
+      transition: background 0.22s cubic-bezier(.4,0,.2,1), transform 0.22s cubic-bezier(.4,0,.2,1), box-shadow 0.22s cubic-bezier(.4,0,.2,1);
     }
-    .card:hover { background: #f4f4f4; }
+    .card:hover { background: #f4f4f4; transform: translateY(-3px); box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
 
     .card-eyebrow {
       font-size: 12px;
@@ -241,8 +245,10 @@
       display: flex;
       align-items: center;
       gap: 4px;
+      transition: gap 0.2s cubic-bezier(.4,0,.2,1);
     }
-    .card-cta::after { content: ' →'; }
+    .card-cta::after { content: ' →'; transition: transform 0.2s cubic-bezier(.4,0,.2,1); display: inline-block; }
+    .card:hover .card-cta { gap: 8px; }
 
     /* Footer */
     footer {
@@ -323,8 +329,10 @@
       cursor: pointer;
       line-height: 1.5;
       white-space: nowrap;
+      transition: background 0.18s cubic-bezier(.4,0,.2,1), color 0.18s cubic-bezier(.4,0,.2,1), transform 0.12s cubic-bezier(.4,0,.2,1);
     }
-    .copy-btn:hover { background: #0f62fe; color: #ffffff; }
+    .copy-btn:hover { background: #0f62fe; color: #ffffff; transform: scale(1.04); }
+    .copy-btn:active { transform: scale(0.97); }
     .copy-btn.copied { color: #198038; border-color: #198038; background: #defbe6; }
     .clone-box .prompt-text {
       font-family: 'IBM Plex Mono', 'Courier New', monospace;
